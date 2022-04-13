@@ -1,0 +1,13 @@
+//@import '~@angular/material/theming';
+@use '@angular/material' as mat;
+@import 'src/fonts';
+
+// TYPOGRAPHY
+$custom-typography: mat.define-typography-config(
+  $font-family: 'Yekan, Roboto, monospace',
+  $headline: mat.define-typography-level(42px, 48px, 700),
+  $body-1: mat.define-typography-level(15px, 25px, 500)
+);
+
+@include mat.core($custom-typography);
+
