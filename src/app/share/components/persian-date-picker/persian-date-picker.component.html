@@ -1,0 +1,15 @@
+<mat-form-field appearance='outline' class='date-picker w-100'>
+  <mat-label>{{ datePickerLabel }}</mat-label>
+  <input
+    matInput
+    [matDatepicker]='picker'
+    disabled
+    [value]='dateControl.value'
+    [min]='minValidDate'
+    [max]='maxValidDate'
+    (dateChange)='onDateChange($event.value._d, persianDate.value)'
+    #persianDate
+  />
+  <mat-datepicker-toggle matSuffix [for]='picker'></mat-datepicker-toggle>
+  <mat-datepicker #picker disabled='false'></mat-datepicker>
+</mat-form-field>

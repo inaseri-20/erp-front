@@ -1,0 +1,37 @@
+<div class='container justify-content-center' style='min-height: 100vh; display: flex'>
+
+  <div class='row'>
+    <div class='col-md-12 mx-auto d-grid align-content-center'>
+      <mat-card class='mat-elevation-z18 rounded rounded-3 border border-0'>
+        <mat-card-content class='text-center p-5'>
+
+          <form [formGroup]='loginForm' (ngSubmit)='login()'>
+
+            <div class='row'>
+
+              <div class='col-md-12 col-12 text-end'>
+
+                <h3 class='text-center mt-1'>به سیستم مدیریت کار خوش آمدید</h3>
+
+                <mat-form-field appearance='outline' class='w-100'>
+                  <mat-label>شماره موبایل</mat-label>
+                  <input matInput formControlName='username' type='text'>
+                </mat-form-field>
+
+                <button mat-raised-button color='accent' type='submit' class='mx-auto me-0'
+                        [class.spinner]='loading' [disabled]='loading'>ورود
+                </button>
+
+              </div>
+
+            </div>
+
+          </form>
+
+        </mat-card-content>
+
+      </mat-card>
+    </div>
+  </div>
+
+</div>

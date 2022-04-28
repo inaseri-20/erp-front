@@ -1,0 +1,48 @@
+<div class='container justify-content-center' style='min-height: 100vh; display: flex'>
+
+  <div class='row'>
+    <div class='col-md-12 mx-auto d-grid align-content-center'>
+      <mat-card class='mat-elevation-z18 rounded rounded-3 border border-0'>
+        <mat-card-content class='text-center p-5'>
+
+          <form [formGroup]='verifyCodeForm' (ngSubmit)='verify()'>
+
+            <div class='row'>
+
+              <div class='col-md-12 col-12 text-end'>
+
+                <h3 class='text-center mt-1'>به سیستم مدیریت کار خوش آمدید</h3>
+
+                <mat-form-field appearance='outline' class='w-100'>
+                  <mat-label>شماره موبایل شما</mat-label>
+                  <input matInput formControlName='username' type='text' readonly>
+                  <mat-hint [routerLink]="['/auth/login']">شماره وارد شده اشتباه است؟</mat-hint>
+                </mat-form-field>
+
+                <mat-form-field appearance='outline' class='w-100'>
+                  <mat-label>کد پیامک شده</mat-label>
+                  <input matInput formControlName='code' type='tell'>
+                </mat-form-field>
+
+
+                <button mat-raised-button color='accent' type='button' class='mx-auto me-2'
+                        [class.spinner]='loading' [disabled]='loading' (click)='getCode()'>دریافت مجدد رمز عبور
+                </button>
+
+                <button mat-raised-button color='warn' type='submit' class='mx-auto me-0'
+                        [class.spinner]='loading' [disabled]='loading'>ورود
+                </button>
+
+              </div>
+
+            </div>
+
+          </form>
+
+        </mat-card-content>
+
+      </mat-card>
+    </div>
+  </div>
+
+</div>

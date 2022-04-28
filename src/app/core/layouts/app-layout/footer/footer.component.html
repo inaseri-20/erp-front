@@ -1,0 +1,38 @@
+<div class='row mt-3'>
+
+  <nav class='bottom-nav'>
+    <a class='bottom-nav__destination' routerLinkActive='bottom-nav__destination--active' [routerLink]="['/dashboard']">
+      <mat-icon>chair</mat-icon>
+      <span class='bottom-nav__label'>اتاق مشاور</span>
+    </a>
+
+    <a class='bottom-nav__destination' routerLinkActive='bottom-nav__destination--active'
+       [routerLink]="['/user/profile-view']">
+      <mat-icon>portrait</mat-icon>
+      <span class='bottom-nav__label'>پروفایل</span>
+    </a>
+
+    <a class='bottom-nav__destination' routerLinkActive='bottom-nav__destination--active' [routerLink]="['/vacation']">
+      <mat-icon>mail_outline</mat-icon>
+      <span class='bottom-nav__label'>نامه ها</span>
+    </a>
+
+    <form target='_blank' method='post' action='https://course.pezeshkito.com/auth/pezeshkito'
+          *ngIf='clientSetting?.course_allow'>
+
+      <input name='token' type='hidden' [value]='clientInfo?.jti'>
+      <input name='mobile' type='hidden' [value]='clientInfo?.main_phone'>
+      <input name='first_name' type='hidden' [value]='clientInfo?.first_name'>
+      <input name='last_name' type='hidden' [value]='clientInfo?.last_name'>
+      <input name='image_url' type='hidden' value='https://pezeshkito.com/media/'>
+
+      <button type='submit'>
+        <mat-icon class='d-flex justify-content-center w-100'>cast_for_education</mat-icon>
+        <span class='bottom-nav__label'>درس ها</span>
+      </button>
+
+    </form>
+
+  </nav>
+
+</div>

@@ -1,0 +1,38 @@
+.active-menu {
+  height: 40px;
+  border-radius: 14px;
+  align-items: center;
+  color: black;
+  text-align: center;
+  background-color: white !important;
+  padding: 30px;
+  display: inline-flex;
+  width: 60%;
+  padding-top: 4px !important;
+}
+
+
+::ng-deep .mat-list-item-content {
+  display: block !important;
+}
+
+
+.center-icon {
+  font-size: 35px;
+  display: flex;
+  align-items: center !important;
+  align-content: center !important;
+  justify-content: center !important;
+  justify-items: center;
+  width: 100%;
+}
+
+a {
+  margin-top: 20px;
+}
+
+button {
+  border: none;
+  background: transparent;
+  margin-top: 20px;
+}

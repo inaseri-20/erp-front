@@ -1,0 +1,22 @@
+@use '~material-bottom-nav' as bottom-nav;
+
+.bottom-nav {
+  @include bottom-nav.root(
+    $background-color: #f9c700,
+    $active-color: #000000,
+    $inactive-color: #454444
+  );
+}
+
+
+span {
+  font-family: Yekan;
+}
+
+button {
+  text-align: center;
+  display: grid !important;
+  border: none;
+  background: transparent;
+  color: #494743 !important;
+}
