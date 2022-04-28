@@ -1,39 +1,25 @@
 <mat-nav-list>
   <a [routerLink]="['/dashboard']" routerLinkActive='active-menu' matTooltip='داشبورد' matTooltipPosition='before'
-     mat-list-item>
-    <mat-icon class='me-2 center-icon'>chair</mat-icon>
-    <span style='font-size: 12px;'>اتاق مشاور</span>
+     mat-list-item class='d-flex'>
+    <mat-icon class='center-icon'>chair</mat-icon>
+    <span style='font-size: 12px;'> مشاور</span>
   </a>
+
+  <hr class='w-100 bg-dark my-3'>
 
   <a [routerLink]="['/user/profile-view']" routerLinkActive='active-menu' matTooltip='پروفایل'
      matTooltipPosition='before'
-     mat-list-item>
-    <mat-icon class='me-2 center-icon'>portrait</mat-icon>
+     mat-list-item class='d-flex'>
+    <mat-icon class='center-icon'>portrait</mat-icon>
     <span style='font-size: 12px;'>پروفایل</span>
   </a>
 
-  <a [routerLink]="['/vacation']" routerLinkActive='active-menu' clas matTooltip='نامه ها' matTooltipPosition='before'
-     mat-list-item>
-    <mat-icon class='me-2 center-icon'>mail_outline</mat-icon>
+  <hr class='w-100 bg-dark my-3'>
+
+  <a [routerLink]="['/vacation']" routerLinkActive='active-menu' matTooltip='نامه ها' matTooltipPosition='before'
+     mat-list-item class='d-flex'>
+    <mat-icon class='center-icon'>mail_outline</mat-icon>
     <span style='font-size: 12px;'>نامه ها</span>
   </a>
-
-
-  <form target='_blank' method='post' action='https://course.pezeshkito.com/auth/pezeshkito'
-        *ngIf='clientSetting?.course_allow'>
-
-    <input name='token' type='hidden' [value]='clientInfo?.jti'>
-    <input name='mobile' type='hidden' [value]='clientInfo?.main_phone'>
-    <input name='first_name' type='hidden' [value]='clientInfo?.first_name'>
-    <input name='last_name' type='hidden' [value]='clientInfo?.last_name'>
-    <input name='image_url' type='hidden' value='https://pezeshkito.com/media/'>
-
-    <button routerLinkActive='active-menu' matTooltip='درس ها' matTooltipPosition='before' type='submit'
-            mat-list-item>
-      <mat-icon class='me-2 center-icon'>cast_for_education</mat-icon>
-      <span style='font-size: 12px;'>درس ها</span>
-    </button>
-
-  </form>
 
 </mat-nav-list>

@@ -1,13 +1,6 @@
 .custom-side-nav {
-  background-color: rgb(249, 199, 0);
-  color: rgb(255, 255, 255);
   width: 6.5rem;
   right: 1.2rem;
-  z-index: 2;
-  height: 400px;
-  margin-top: 100px;
-  border-radius: 3rem;
-  text-align: center;
   padding: 2.4rem 0;
 }
 
@@ -38,21 +31,6 @@
   }
 }
 
-
-@media only screen and (max-width: 600px) {
-  #day-title, #user-full-name, #mentor {
-    display: none;
-  }
-
-  #day-button {
-    padding: 0 !important;
-  }
-
-  #notification-icon, #heart-icon {
-    font-size: 25px !important;
-  }
-
-}
 
 .mat-drawer-content {
   position: relative;

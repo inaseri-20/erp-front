@@ -1,12 +1,40 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthLayoutComponent } from './core/layouts/auth-layout/auth-layout.component';
+import { AppLayoutComponent } from './core/layouts/app-layout/app-layout.component';
+import { UserGuard } from './core/guards/user.guard';
+import { AdminGuard } from './core/guards/admin.guard';
+import { AssistantGuard } from './core/guards/assistant.guard';
+import { ClientGuard } from './core/guards/client.guard';
 
 const routes: Routes = [
   {
     path: 'auth',
     loadChildren: () => import('./modules/auth/auth.module').then(m => m.AuthModule),
     component: AuthLayoutComponent
+  },
+  {
+    path: 'admin/dashboard',
+    loadChildren: () => import('./modules/admin-dashboard/admin-dashboard.module').then(m => m.AdminDashboardModule),
+    component: AppLayoutComponent,
+    canActivate: [UserGuard, AdminGuard]
+  },
+  {
+    path: 'assistant/dashboard',
+    loadChildren: () => import('./modules/assistant-dashboard/assistant-dashboard.module').then(m => m.AssistantDashboardModule),
+    component: AppLayoutComponent,
+    canActivate: [UserGuard, AssistantGuard]
+  },
+  {
+    path: 'client/dashboard',
+    loadChildren: () => import('./modules/client-dashboard/client-dashboard.module').then(m => m.ClientDashboardModule),
+    component: AppLayoutComponent,
+    canActivate: [UserGuard, ClientGuard]
+  },
+  {
+    path: '',
+    redirectTo: 'client/dashboard',
+    pathMatch: 'full'
   }
 ];
 
