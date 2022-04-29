@@ -1,11 +1,11 @@
 <mat-toolbar>
-  <mat-toolbar-row style='overflow: hidden; display: inline-block !important; height: 90px'>
+  <mat-toolbar-row style='overflow: hidden; display: inline-block !important; background: #af80e8; color: white'>
 
-    <button mat-icon-button class='menu-btn mt-3 mb-1 float-start' (click)='toggleMenu()' id='side-menu'>
-      <mat-icon class='mat-18'>
-        {{(this.sideExpand) ? 'arrow_forward' : 'menu'}}
-      </mat-icon>
-    </button>
+<!--    <button mat-icon-button class='menu-btn mt-3 mb-1 float-start' (click)='toggleMenu()' id='side-menu'>-->
+<!--      <mat-icon class='mat-18'>-->
+<!--        {{(this.sideExpand) ? 'arrow_forward' : 'menu'}}-->
+<!--      </mat-icon>-->
+<!--    </button>-->
 
     <button mat-icon-button class='mt-3 mb-1 float-end' [matMenuTriggerFor]='menu'>
       <mat-icon>person</mat-icon>
@@ -26,9 +26,9 @@
 
   <mat-sidenav-container style='min-height: 100vh'>
 
-    <mat-sidenav #sidenav [mode]='navMode' [(opened)]='sideExpand' class='custom-side-nav'>
-      <app-sidebar (closeNav)='sidenav.close()'></app-sidebar>
-    </mat-sidenav>
+<!--    <mat-sidenav #sidenav [mode]='navMode' [(opened)]='sideExpand' class='custom-side-nav'>-->
+<!--      <app-sidebar (closeNav)='sidenav.close()'></app-sidebar>-->
+<!--    </mat-sidenav>-->
 
     <mat-sidenav-content>
 
@@ -48,4 +48,4 @@
 </div>
 
 
-<app-footer id='footer'></app-footer>
+<!--<app-footer id='footer'></app-footer>-->

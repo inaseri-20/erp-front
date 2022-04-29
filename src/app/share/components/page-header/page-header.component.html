@@ -1,0 +1,20 @@
+<div class='row'>
+  <div class='col-md-10 col-12 mx-auto'>
+    <div class='overflow-hidden'>
+      <h2 class='float-start'>{{pageTitle}}</h2>
+      <button mat-icon-button
+              [matTooltip]='firstButtonTooltip'
+              *ngIf='firstButtonIcon'
+              (click)='firstButtonAction.emit()' class='float-end'>
+        <mat-icon>{{firstButtonIcon}}</mat-icon>
+      </button>
+
+      <button mat-icon-button
+              [matTooltip]='secondButtonTooltip'
+              *ngIf='secondButtonIcon'
+              (click)='secondButtonAction.emit()' class='float-end mx-2'>
+        <mat-icon>{{secondButtonIcon}}</mat-icon>
+      </button>
+    </div>
+  </div>
+</div>

@@ -15,13 +15,18 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatSliderModule } from '@angular/material/slider';
 import { LineEChartsComponent } from './components/line-echarts/line-echarts.component';
 import { NgxEchartsModule } from 'ngx-echarts';
+import { NoDataComponent } from './components/no-data/no-data.component';
+import { PageHeaderComponent } from './components/page-header/page-header.component';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 
 @NgModule({
   declarations: [
     SplashScreenComponent,
     AddToHomeScreenComponent,
-    LineEChartsComponent
+    LineEChartsComponent,
+    NoDataComponent,
+    PageHeaderComponent
   ],
   imports: [
     NgxEchartsModule.forRoot({
@@ -38,11 +43,14 @@ import { NgxEchartsModule } from 'ngx-echarts';
     FormsModule,
     MatMenuModule,
     MatSliderModule,
-    NgxEchartsModule
+    NgxEchartsModule,
+    MatTooltipModule
   ],
   exports: [
     SplashScreenComponent,
-    LineEChartsComponent
+    LineEChartsComponent,
+    NoDataComponent,
+    PageHeaderComponent
   ],
   providers: [
     { provide: MatPaginatorIntl, useClass: CustomMatPaginatorIntlService }

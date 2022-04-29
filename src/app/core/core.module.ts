@@ -6,14 +6,14 @@ import { ApiService } from './services/api/api.service';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ApiInterceptor } from './interceptor/api.interceptor';
 import { MatDialogModule } from '@angular/material/dialog';
-import { TranslateTypePipe } from './pipes/translate-type.pipe';
 import { PersianNumberPipe } from './pipes/persian-number.pipe';
+import { PersianDatePipe } from './pipes/persian-date.pipe';
 
 
 @NgModule({
   declarations: [
-    TranslateTypePipe,
-    PersianNumberPipe
+    PersianNumberPipe,
+    PersianDatePipe
   ],
   imports: [
     CommonModule,
@@ -21,7 +21,7 @@ import { PersianNumberPipe } from './pipes/persian-number.pipe';
     MatDialogModule
   ],
   exports: [
-    TranslateTypePipe,
+    PersianDatePipe,
     PersianNumberPipe
   ],
   providers: [
