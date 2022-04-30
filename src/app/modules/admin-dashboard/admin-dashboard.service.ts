@@ -46,4 +46,8 @@ export class AdminDashboardService {
   getDepartments(): Observable<any> {
     return this.apiService.get(this.departmentBaseApi);
   }
+
+  creatDepartment(data: any): Observable<any> {
+    return this.apiService.post(this.departmentBaseApi, null, null, data);
+  }
 }

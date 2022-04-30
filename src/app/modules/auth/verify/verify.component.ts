@@ -41,12 +41,10 @@ export class VerifyComponent implements OnInit {
         localStorage.setItem('erpRefreshToken', response.refresh);
         localStorage.setItem('group', response.group);
 
-        if (response.group.includes('main')) {
-          this.router.navigate(['/admin/dashboard']);
-        } else if (response.group.includes('middle')) {
-          this.router.navigate(['/assistant/dashboard']);
-        } else if (response.group.includes('client')) {
+        if (response.group.includes('client')) {
           this.router.navigate(['/client/dashboard']);
+        } else {
+          this.router.navigate(['/admin/dashboard']);
         }
 
         this.alertService.messageSuccess(response.msg);

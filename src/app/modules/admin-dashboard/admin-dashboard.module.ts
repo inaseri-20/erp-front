@@ -14,12 +14,15 @@ import { PersianDatePickerModule } from '../../share/components/persian-date-pic
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { CreateDepartmentComponent } from './create-department/create-department.component';
 
 
 @NgModule({
   declarations: [
     AdminDashboardComponent,
-    CreateProjectComponent
+    CreateProjectComponent,
+    CreateDepartmentComponent
   ],
   imports: [
     CommonModule,
@@ -34,7 +37,8 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     PersianDatePickerModule,
     MatButtonModule,
     MatIconModule,
-    MatTooltipModule
+    MatTooltipModule,
+    MatExpansionModule
   ]
 })
 export class AdminDashboardModule {
