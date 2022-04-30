@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AdminDashboardService } from '../admin-dashboard.service';
 import { AlertService } from '../../../core/services/alert/alert.service';
+import jwt_decode from 'jwt-decode';
 
 @Component({
   selector: 'app-create-project',
@@ -78,6 +79,12 @@ export class CreateProjectComponent implements OnInit {
       dead_line: [''],
       start_date: ['']
     });
+
+    if (JSON.stringify(localStorage.getItem('group')).includes('middle')) {
+      this.projectForm.get('owner')?.disable();
+      const userId: any = jwt_decode(JSON.stringify(localStorage.getItem('erpAccessToken')));
+      this.projectForm.get('owner')?.setValue(userId.user_id);
+    }
   }
 
   setDate(date: any, datePickerType: string): any {

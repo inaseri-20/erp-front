@@ -7,7 +7,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PersianDatePickerModule } from './components/persian-date-picker/persian-date-picker.module';
 import { MatIconModule } from '@angular/material/icon';
 import { MatCardModule } from '@angular/material/card';
-import { MatPaginatorIntl } from '@angular/material/paginator';
+import { MatPaginatorIntl, MatPaginatorModule } from '@angular/material/paginator';
 import { CustomMatPaginatorIntlService } from './components/paginator/custom-mat-paginator-intl.service';
 import { SplashScreenComponent } from './components/splash-screen/splash-screen.component';
 import { AddToHomeScreenComponent } from './components/add-to-home-screen/add-to-home-screen.component';
@@ -18,6 +18,13 @@ import { NgxEchartsModule } from 'ngx-echarts';
 import { NoDataComponent } from './components/no-data/no-data.component';
 import { PageHeaderComponent } from './components/page-header/page-header.component';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { TableSaveCSVComponent } from './components/table/table-save-csv/table-save-csv.component';
+import { TableComponent } from './components/table/table.component';
+import { TableSaveXLSComponent } from './components/table/table-save-xls/table-save-xls.component';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatSelectModule } from '@angular/material/select';
+import { MatTableModule } from '@angular/material/table';
+import { MatSortModule } from '@angular/material/sort';
 
 
 @NgModule({
@@ -26,7 +33,10 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     AddToHomeScreenComponent,
     LineEChartsComponent,
     NoDataComponent,
-    PageHeaderComponent
+    PageHeaderComponent,
+    TableSaveCSVComponent,
+    TableComponent,
+    TableSaveXLSComponent,
   ],
   imports: [
     NgxEchartsModule.forRoot({
@@ -44,13 +54,21 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     MatMenuModule,
     MatSliderModule,
     NgxEchartsModule,
-    MatTooltipModule
+    MatTooltipModule,
+    MatPaginatorModule,
+    MatDatepickerModule,
+    MatSelectModule,
+    MatTableModule,
+    MatSortModule
   ],
   exports: [
     SplashScreenComponent,
     LineEChartsComponent,
     NoDataComponent,
-    PageHeaderComponent
+    PageHeaderComponent,
+    TableSaveCSVComponent,
+    TableComponent,
+    TableSaveXLSComponent,
   ],
   providers: [
     { provide: MatPaginatorIntl, useClass: CustomMatPaginatorIntlService }
