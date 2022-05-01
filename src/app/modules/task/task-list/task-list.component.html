@@ -17,6 +17,7 @@
 
         <a [routerLink]="['/task/create']"
            [queryParams]='{taskId: task.id, projectId}'
+           (contextmenu)="openSubTasks(task.id, $event)"
            class='text-decoration-none'>
 
           <mat-card class='shadow shadow-sm border rounded-3'>

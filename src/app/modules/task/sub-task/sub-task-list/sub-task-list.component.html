@@ -1,0 +1,9 @@
+<app-page-header [pageTitle]="'ساب تسک ها'"
+                 [secondButtonIcon]="'loupe'"
+                 [secondButtonTooltip]="'افزدن ساب تسک'"
+                 (secondButtonAction)="router.navigate(['/task/sub-task/create/' + taskId])"
+                 [firstButtonIcon]="'arrow_back'"
+                 (firstButtonAction)="router.navigate(['/task/' + taskId])">
+</app-page-header>
+
+

@@ -11,6 +11,10 @@ const routes: Routes = [
   {
     path: ':projectId',
     component: TaskListComponent
+  },
+  {
+    path: 'sub-task',
+    loadChildren: () => import('./sub-task/sub-task.module').then(m => m.SubTaskModule)
   }
 ];
 

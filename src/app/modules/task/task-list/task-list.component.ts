@@ -31,4 +31,8 @@ export class TaskListComponent implements OnInit {
     );
   }
 
+  openSubTasks(id: any, event: MouseEvent) {
+    event.preventDefault();
+    this.router.navigate(['/task/sub-task/' + id]);
+  }
 }
