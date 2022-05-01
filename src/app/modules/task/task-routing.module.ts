@@ -9,7 +9,7 @@ const routes: Routes = [
     component: CreateTaskComponent
   },
   {
-    path: ':projectId',
+    path: '',
     component: TaskListComponent
   },
   {

@@ -42,7 +42,7 @@ export class VerifyComponent implements OnInit {
         localStorage.setItem('group', response.group);
 
         if (response.group.includes('client')) {
-          this.router.navigate(['/client/dashboard']);
+          this.router.navigate(['/task']);
         } else {
           this.router.navigate(['/admin/dashboard']);
         }

@@ -31,9 +31,21 @@ export class SubTaskCreateComponent implements OnInit {
 
   ngOnInit(): void {
     this.createForm();
-    this.addFile();
     this.getUsers();
-    console.log(this.data);
+    if (this.data.data) {
+      this.subTaskForm.patchValue(this.data.data);
+      const files: any = [];
+      this.data.data.files.forEach((el: any) => {
+        files.push({
+          file: 'not selected',
+          fileName: el
+        });
+        this.addFile();
+      });
+      this.subTaskForm.get('fileList')?.setValue(files);
+    } else {
+      this.addFile();
+    }
   }
 
   createForm(): void {
@@ -92,16 +104,27 @@ export class SubTaskCreateComponent implements OnInit {
   }
 
   submitSubTask(): void {
-    console.log(this.uploadedFileNames);
-    this.subTaskForm.addControl('files', new FormControl());
-    this.subTaskForm.get('files')?.setValue(this.uploadedFileNames);
-    delete this.subTaskForm.value.fileList;
-    this.subTaskService.createSubTask(this.subTaskForm.value).subscribe(
-      response => {
-        this.dialogRef.close(true);
-        this.alertService.messageSuccess('عملیات با موفقیت انجام شد');
-      }, error => this.alertService.messageError(error)
-    );
+    if (this.data.data) {
+      if (this.uploadedFileNames.length !== 0) {
+        this.subTaskForm.addControl('files', new FormControl());
+        this.subTaskForm.get('files')?.setValue(this.uploadedFileNames);
+      }
+      delete this.subTaskForm.value.fileList;
+      delete this.subTaskForm.value.task;
+      this.subTaskService.updateSubTask(this.subTaskForm.value, this.data.data.id).subscribe(
+        response => {
+          this.alertService.messageSuccess('عملیات به روز رسانی با موفقیت انجام شد');
+          this.dialogRef.close(true);
+        }
+      );
+    } else {
+      this.subTaskService.createSubTask(this.subTaskForm.value).subscribe(
+        response => {
+          this.dialogRef.close(true);
+          this.alertService.messageSuccess('عملیات با موفقیت انجام شد');
+        }, error => this.alertService.messageError(error)
+      );
+    }
   }
 
 

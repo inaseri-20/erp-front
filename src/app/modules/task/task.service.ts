@@ -25,7 +25,7 @@ export class TaskService {
     return this.apiService.delete(`${this.taskBaseApi}${taskId}/`);
   }
 
-  getProjectTasks(filters: any): Observable<any> {
+  getProjectTasks(filters?: any): Observable<any> {
     return this.apiService.get(this.taskBaseApi, null, filters);
   }
 

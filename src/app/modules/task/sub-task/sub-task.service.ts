@@ -25,6 +25,10 @@ export class SubTaskService {
     return this.apiService.post(this.subTaskBaseApi, null, null, data);
   }
 
+  updateSubTask(data: any, subTaskId: number): Observable<any> {
+    return this.apiService.put(`${this.subTaskBaseApi}${subTaskId}/`, null, null, data);
+  }
+
   getSubTasks(filters: any): Observable<any> {
     return this.apiService.get(this.subTaskBaseApi, null, filters);
   }

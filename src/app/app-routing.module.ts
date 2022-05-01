@@ -4,7 +4,6 @@ import { AuthLayoutComponent } from './core/layouts/auth-layout/auth-layout.comp
 import { AppLayoutComponent } from './core/layouts/app-layout/app-layout.component';
 import { UserGuard } from './core/guards/user.guard';
 import { AdminGuard } from './core/guards/admin.guard';
-import { ClientGuard } from './core/guards/client.guard';
 
 const routes: Routes = [
   {
@@ -17,12 +16,6 @@ const routes: Routes = [
     loadChildren: () => import('./modules/admin-dashboard/admin-dashboard.module').then(m => m.AdminDashboardModule),
     component: AppLayoutComponent,
     canActivate: [UserGuard, AdminGuard]
-  },
-  {
-    path: 'client/dashboard',
-    loadChildren: () => import('./modules/client-dashboard/client-dashboard.module').then(m => m.ClientDashboardModule),
-    component: AppLayoutComponent,
-    canActivate: [UserGuard, ClientGuard]
   },
   {
     path: 'task',

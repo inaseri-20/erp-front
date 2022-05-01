@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { MatDialog } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { SubTaskCreateComponent } from '../sub-task-create/sub-task-create.component';
 import { SubTaskService } from '../sub-task.service';
 
@@ -11,9 +11,12 @@ import { SubTaskService } from '../sub-task.service';
 })
 export class SubTaskListComponent implements OnInit {
 
-  taskId = this.activatedRoute.snapshot.params['taskId'];
+  taskId = this.data.taskId;
+  subTasks: any;
 
-  constructor(public router: Router,
+  constructor(public dialogRef: MatDialogRef<SubTaskListComponent>,
+              @Inject(MAT_DIALOG_DATA) public data: any,
+              public router: Router,
               private matDialog: MatDialog,
               private subTaskService: SubTaskService,
               public activatedRoute: ActivatedRoute) {
@@ -23,21 +26,21 @@ export class SubTaskListComponent implements OnInit {
     this.getSubTasks();
   }
 
-  openCreateSubTask(): void {
+  openCreateSubTask(data?: any): void {
     this.matDialog.open(SubTaskCreateComponent, {
       width: '600px',
       height: '600px',
-      data: { taskId: this.taskId }
+      data: { taskId: this.taskId, data }
     }).afterClosed();
   }
 
   getSubTasks(): void {
-    const filters = { task: this.taskId };
-    this.subTaskService.getSubTasks(filters).subscribe(
+    const filter = { task: this.taskId };
+    this.subTaskService.getSubTasks(filter).subscribe(
       response => {
-
+        this.subTasks = response;
       }
-    )
+    );
   }
 
 }

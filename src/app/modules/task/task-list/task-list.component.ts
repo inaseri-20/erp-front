@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { TaskService } from '../task.service';
+import {Component, OnInit} from '@angular/core';
+import {ActivatedRoute, Router} from '@angular/router';
+import {TaskService} from '../task.service';
+import {MatDialog} from "@angular/material/dialog";
+import {SubTaskListComponent} from "../sub-task/sub-task-list/sub-task-list.component";
 
 @Component({
   selector: 'app-task-list',
@@ -10,9 +12,10 @@ import { TaskService } from '../task.service';
 export class TaskListComponent implements OnInit {
 
   tasks: any[] = [];
-  projectId: any;
+  projectId = this.activatedRoute.snapshot.queryParams['projectId'];
 
   constructor(public router: Router,
+              private matDialog: MatDialog,
               private taskService: TaskService,
               private activatedRoute: ActivatedRoute) {
   }
@@ -23,7 +26,10 @@ export class TaskListComponent implements OnInit {
   }
 
   getProjectTasks(): void {
-    const queryParams = { project: this.projectId };
+    let queryParams = {}
+    if (this.projectId) {
+      queryParams = {project: this.projectId};
+    }
     this.taskService.getProjectTasks(queryParams).subscribe(
       response => {
         this.tasks = response;
@@ -33,6 +39,6 @@ export class TaskListComponent implements OnInit {
 
   openSubTasks(id: any, event: MouseEvent) {
     event.preventDefault();
-    this.router.navigate(['/task/sub-task/' + id]);
+    this.matDialog.open(SubTaskListComponent, {width: '600px', data: {taskId: id}})
   }
 }
