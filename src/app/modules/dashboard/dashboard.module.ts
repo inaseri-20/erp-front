@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
-import { AdminDashboardRoutingModule } from './admin-dashboard-routing.module';
+import { DashboardRoutingModule } from './dashboard-routing.module';
 import { ShareModule } from '../../share/share.module';
 import { CoreModule } from '../../core/core.module';
 import { CreateProjectComponent } from './create-project/create-project.component';
@@ -27,7 +27,7 @@ import { MatListModule } from '@angular/material/list';
   ],
   imports: [
     CommonModule,
-    AdminDashboardRoutingModule,
+    DashboardRoutingModule,
     ShareModule,
     CoreModule,
     MatCardModule,
@@ -43,5 +43,5 @@ import { MatListModule } from '@angular/material/list';
     MatListModule
   ]
 })
-export class AdminDashboardModule {
+export class DashboardModule {
 }

@@ -3,7 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AlertService } from '../../../core/services/alert/alert.service';
 import { TaskService } from '../task.service';
-import { AdminDashboardService } from '../../admin-dashboard/admin-dashboard.service';
+import { DashboardService } from '../../dashboard/dashboard.service';
 import { CleanObjectService } from '../../../core/services/api/clean-object.service';
 
 @Component({
@@ -25,7 +25,7 @@ export class CreateTaskComponent implements OnInit {
               private alertService: AlertService,
               public activatedRoute: ActivatedRoute,
               private cleanObjectService: CleanObjectService,
-              private adminDashboardService: AdminDashboardService) {
+              private dashboardService: DashboardService) {
   }
 
   ngOnInit(): void {
@@ -51,7 +51,7 @@ export class CreateTaskComponent implements OnInit {
   }
 
   getStatues(): void {
-    this.adminDashboardService.getStatues().subscribe(
+    this.dashboardService.getStatues().subscribe(
       response => {
         this.statuses = response;
       }
@@ -59,7 +59,7 @@ export class CreateTaskComponent implements OnInit {
   }
 
   getProjects(): void {
-    this.adminDashboardService.getProjects().subscribe(
+    this.dashboardService.getProjects().subscribe(
       response => {
         this.projects = response;
       }
@@ -76,7 +76,7 @@ export class CreateTaskComponent implements OnInit {
   }
 
   getUsers(): void {
-    this.adminDashboardService.getClients().subscribe(
+    this.dashboardService.getClients().subscribe(
       response => {
         this.users = response;
       }, error => this.alertService.messageError(error)

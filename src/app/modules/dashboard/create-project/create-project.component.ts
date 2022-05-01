@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { AdminDashboardService } from '../admin-dashboard.service';
+import { DashboardService } from '../dashboard.service';
 import { AlertService } from '../../../core/services/alert/alert.service';
 import jwt_decode from 'jwt-decode';
 import { CleanObjectService } from '../../../core/services/api/clean-object.service';
@@ -24,7 +24,7 @@ export class CreateProjectComponent implements OnInit {
               private alertService: AlertService,
               public activatedRoute: ActivatedRoute,
               private cleanObjectService: CleanObjectService,
-              private adminDashboardService: AdminDashboardService) {
+              private dashboardService: DashboardService) {
   }
 
   ngOnInit(): void {
@@ -38,7 +38,7 @@ export class CreateProjectComponent implements OnInit {
   }
 
   getStatues(): void {
-    this.adminDashboardService.getStatues().subscribe(
+    this.dashboardService.getStatues().subscribe(
       response => {
         this.statuses = response;
       }
@@ -46,7 +46,7 @@ export class CreateProjectComponent implements OnInit {
   }
 
   getClients(): void {
-    this.adminDashboardService.getClients().subscribe(
+    this.dashboardService.getClients().subscribe(
       response => {
         this.clients = response;
       }
@@ -54,7 +54,7 @@ export class CreateProjectComponent implements OnInit {
   }
 
   getDepartments(): void {
-    this.adminDashboardService.getDepartments().subscribe(
+    this.dashboardService.getDepartments().subscribe(
       response => {
         this.departments = response;
       }
@@ -62,7 +62,7 @@ export class CreateProjectComponent implements OnInit {
   }
 
   getProjectDetail(): void {
-    this.adminDashboardService.getProject(this.activatedRoute.snapshot.queryParams['projectId']).subscribe(
+    this.dashboardService.getProject(this.activatedRoute.snapshot.queryParams['projectId']).subscribe(
       response => {
         this.projectForm.patchValue(response);
       }
@@ -95,13 +95,13 @@ export class CreateProjectComponent implements OnInit {
   submitProject(): void {
     const submitData = this.cleanObjectService.clean(this.projectForm.getRawValue());
     if (this.activatedRoute.snapshot.queryParams['projectId']) {
-      this.adminDashboardService.updateProject(submitData, this.activatedRoute.snapshot.queryParams['projectId']).subscribe(
+      this.dashboardService.updateProject(submitData, this.activatedRoute.snapshot.queryParams['projectId']).subscribe(
         response => {
           this.router.navigate(['/admin/dashboard']);
         }, error => this.alertService.messageError(error)
       );
     } else {
-      this.adminDashboardService.createProject(submitData).subscribe(
+      this.dashboardService.createProject(submitData).subscribe(
         response => {
           this.router.navigate(['/admin/dashboard']);
         }, error => this.alertService.messageError(error)
@@ -110,7 +110,7 @@ export class CreateProjectComponent implements OnInit {
   }
 
   deleteProject(): void {
-    this.adminDashboardService.deleteProject(this.activatedRoute.snapshot.queryParams['projectId']).subscribe(
+    this.dashboardService.deleteProject(this.activatedRoute.snapshot.queryParams['projectId']).subscribe(
       response => {
         this.router.navigate(['/admin/dashboard']);
       }, error => this.alertService.messageError(error)

@@ -1,7 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { AdminDashboardService } from '../../../admin-dashboard/admin-dashboard.service';
+import { DashboardService } from '../../../dashboard/dashboard.service';
 import { SubTaskService } from '../sub-task.service';
 import { AlertService } from '../../../../core/services/alert/alert.service';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
@@ -28,7 +28,7 @@ export class SubTaskCreateComponent implements OnInit {
               private cleanObjectService: CleanObjectService,
               public dialogRef: MatDialogRef<SubTaskCreateComponent>,
               @Inject(MAT_DIALOG_DATA) public data: any,
-              private adminDashboardService: AdminDashboardService) {
+              private dashboardService: DashboardService) {
   }
 
   ngOnInit(): void {
@@ -76,7 +76,7 @@ export class SubTaskCreateComponent implements OnInit {
   }
 
   getUsers(): void {
-    this.adminDashboardService.getClients().subscribe(
+    this.dashboardService.getClients().subscribe(
       response => {
         this.users = response;
       }

@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { AdminDashboardService } from '../admin-dashboard.service';
+import { DashboardService } from '../dashboard.service';
 import { Router } from '@angular/router';
 import jwt_decode from 'jwt-decode';
 
 @Component({
-  selector: 'app-admin-dashboard',
+  selector: 'app-dashboard',
   templateUrl: './admin-dashboard.component.html',
   styleUrls: ['./admin-dashboard.component.scss']
 })
@@ -16,7 +16,7 @@ export class AdminDashboardComponent implements OnInit {
   secondTopButtonIcon = 'local_fire_department';
   secondTopButtonTooltip = 'ایجاد دپارتمان جدید';
 
-  constructor(private adminDashboardService: AdminDashboardService,
+  constructor(private dashboardService: DashboardService,
               public router: Router) {
   }
 
@@ -29,7 +29,7 @@ export class AdminDashboardComponent implements OnInit {
   }
 
   getProjects(): void {
-    this.adminDashboardService.getProjects().subscribe(
+    this.dashboardService.getProjects().subscribe(
       response => {
         this.projects = response;
       }

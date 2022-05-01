@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export class AdminDashboardService {
+export class DashboardService {
 
   projectBaseApi = `${environment.apiUrl}task/`;
   clientBaseApi = `${environment.apiUrl}auth/client/`;

@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { AdminDashboardService } from '../admin-dashboard.service';
+import { DashboardService } from '../dashboard.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AlertService } from '../../../core/services/alert/alert.service';
 import { MatSelectionList } from '@angular/material/list';
@@ -21,7 +21,7 @@ export class CreateDepartmentComponent implements OnInit {
               private formBuilder: FormBuilder,
               private alertService: AlertService,
               private activatedRoute: ActivatedRoute,
-              private adminDashboardService: AdminDashboardService) {
+              private dashboardService: DashboardService) {
   }
 
   ngOnInit(): void {
@@ -33,7 +33,7 @@ export class CreateDepartmentComponent implements OnInit {
   }
 
   submit(): void {
-    this.adminDashboardService.creatDepartment(this.departmentForm.value).subscribe(
+    this.dashboardService.creatDepartment(this.departmentForm.value).subscribe(
       response => {
         this.alertService.messageSuccess('دپارتمان با موفقیت ثبت شد');
         this.router.navigate(['/admin/dashboard']);
@@ -42,7 +42,7 @@ export class CreateDepartmentComponent implements OnInit {
   }
 
   getDepartments(): void {
-    this.adminDashboardService.getDepartments().subscribe(
+    this.dashboardService.getDepartments().subscribe(
       response => {
         this.departments = response;
       }

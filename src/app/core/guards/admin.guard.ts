@@ -19,11 +19,13 @@ export class AdminGuard implements CanActivate {
 
     if (JSON.stringify(localStorage.getItem('group')).includes('admin')) {
       return true;
-    } else {
-      this.alertService.messageError('شما برای مشاهده این قسمت دسترسی ندارید');
-      this.router.navigate(['/auth/login']);
+    } else if (JSON.stringify(localStorage.getItem('group')).includes('middle')) {
+      return true;
+    } else if (JSON.stringify(localStorage.getItem('group')).includes('client')) {
+      this.router.navigate(['/task']);
       return false;
     }
+    return false;
 
   }
 

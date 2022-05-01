@@ -13,7 +13,7 @@ const routes: Routes = [
   },
   {
     path: 'admin/dashboard',
-    loadChildren: () => import('./modules/admin-dashboard/admin-dashboard.module').then(m => m.AdminDashboardModule),
+    loadChildren: () => import('./modules/dashboard/dashboard.module').then(m => m.DashboardModule),
     component: AppLayoutComponent,
     canActivate: [UserGuard, AdminGuard]
   },
@@ -25,7 +25,7 @@ const routes: Routes = [
   },
   {
     path: '',
-    redirectTo: 'client/dashboard',
+    redirectTo: 'admin/dashboard',
     pathMatch: 'full'
   }
 ];
