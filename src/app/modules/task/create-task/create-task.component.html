@@ -1,6 +1,6 @@
 <app-page-header [pageTitle]="'ایجاد تسک'"
                  [firstButtonIcon]="'arrow_back'"
-                 (firstButtonAction)="router.navigate(['/admin/dashboard'])">
+                 (firstButtonAction)="router.navigate(['/task/' + activatedRoute.snapshot.queryParams['projectId']])">
 </app-page-header>
 
 <div class='row'>

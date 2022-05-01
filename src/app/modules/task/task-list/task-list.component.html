@@ -16,7 +16,7 @@
       <div class='col-md-4 col-12 mt-3' *ngFor='let task of tasks'>
 
         <a [routerLink]="['/task/create']"
-           [queryParams]='{taskId: task.id}'
+           [queryParams]='{taskId: task.id, projectId}'
            class='text-decoration-none'>
 
           <mat-card class='shadow shadow-sm border rounded-3'>

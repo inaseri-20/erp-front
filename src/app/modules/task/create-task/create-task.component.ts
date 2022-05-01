@@ -76,14 +76,14 @@ export class CreateTaskComponent implements OnInit {
       this.taskService.updateTask(this.taskForm.value, this.activatedRoute.snapshot.queryParams['taskId']).subscribe(
         response => {
           this.alertService.messageSuccess('تسک با موفقیت به روز رسانی شد');
-          this.router.navigate(['/admin/dashboard']);
+          this.router.navigate(['/task/' + this.activatedRoute.snapshot.queryParams['projectId']]);
         }, error => this.alertService.messageError(error)
       );
     } else {
       this.taskService.createTask(this.taskForm.value).subscribe(
         response => {
           this.alertService.messageSuccess('تسک با موفقیت ذخیره شد');
-          this.router.navigate(['/admin/dashboard']);
+          this.router.navigate(['/task/' + this.activatedRoute.snapshot.queryParams['projectId']]);
         }, error => this.alertService.messageError(error)
       );
     }
@@ -98,7 +98,7 @@ export class CreateTaskComponent implements OnInit {
     this.taskService.deleteTask(this.activatedRoute.snapshot.queryParams['taskId']).subscribe(
       response => {
         this.alertService.messageSuccess('حذف تسک با موفقیت انجام شد');
-        this.router.navigate(['/admin/dashboard']);
+        this.router.navigate(['/task/' + this.activatedRoute.snapshot.queryParams['projectId']]);
       }, error => this.alertService.messageError(error)
     );
   }
