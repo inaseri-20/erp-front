@@ -1,93 +1,82 @@
-<app-page-header [pageTitle]="'افزودن ساب تسک ها'"
-                 [firstButtonIcon]="'arrow_back'"
-                 (firstButtonAction)="router.navigate(['/task/sub-task/' + taskId])">
-</app-page-header>
+<div class='overflow-hidden'>
 
-<div class='row mt-4'>
+  <h2 class='float-start'>افزودن ساب تسک </h2>
+  <button mat-icon-button color='warn' class='float-end' (click)='this.dialogRef.close()'>
+    <mat-icon>cancel</mat-icon>
+  </button>
 
-  <div class='col-md-10 col-12 mx-auto'>
+</div>
 
-    <mat-card>
+<form [formGroup]='subTaskForm' (ngSubmit)='submitSubTask()'>
 
-      <mat-card-content>
+  <div class='row'>
 
-        <form [formGroup]='subTaskForm'>
+    <div class='col-12'>
 
-          <div class='row'>
+      <mat-form-field appearance='outline' class='w-100'>
+        <mat-label>کاربر</mat-label>
+        <mat-select formControlName='user'>
+          <mat-option *ngFor='let user of users'
+                      [value]='user.id'>
+            {{user.first_name}} {{user.last_name}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
 
-            <div class='col-md-10 col-12 mx-auto'>
+    </div>
 
-              <div class='row'>
+    <div class='col-12'>
 
-                <div class='col-md-6 col-12'>
+      <mat-form-field appearance='outline' class='w-100'>
+        <mat-label>توضیحات</mat-label>
+        <input matInput formControlName='message'>
+      </mat-form-field>
 
-                  <mat-form-field appearance='outline' class='w-100'>
-                    <mat-label>کاربر</mat-label>
-                    <mat-select formControlName='user'>
-                      <mat-option *ngFor='let user of users'
-                                  [value]='user.id'>
-                        {{user.first_name}} {{user.last_name}}
-                      </mat-option>
-                    </mat-select>
-                  </mat-form-field>
-
-                </div>
-
-                <div class='col-md-6 col-12'>
-
-                  <mat-form-field appearance='outline' class='w-100'>
-                    <mat-label>توضیحات</mat-label>
-                    <input matInput formControlName='message'>
-                  </mat-form-field>
-
-                </div>
-
-              </div>
-
-              <ng-container formArrayName='files'>
-
-                <ng-container *ngFor='let file of files.controls; let i = index'>
-
-                  <div class='row' [formGroupName]="i">
-
-                    <div class='col-md-9 col-9'>
-                      <mat-form-field appearance='outline' class='w-100'>
-                        <input matInput formControlName='fileName'>
-                      </mat-form-field>
-                    </div>
-
-                    <div class='col-md-3 col-3'>
-                      <button mat-mini-fab (click)='deleteFile(i)' color='warn'>
-                        <mat-icon>delete_forever</mat-icon>
-                      </button>
-
-                      <button mat-mini-fab (click)='addFile()' class='ms-5' type='button'>
-                        <mat-icon>add</mat-icon>
-                      </button>
-                    </div>
-                  </div>
-
-                </ng-container>
-
-
-                <div class='row'>
-                  <div class='col-md-12'>
-                    <button mat-raised-button color='primary'>ثبت</button>
-                  </div>
-                </div>
-
-              </ng-container>
-
-            </div>
-
-          </div>
-
-        </form>
-
-      </mat-card-content>
-
-    </mat-card>
+    </div>
 
   </div>
 
-</div>
+  <ng-container formArrayName='fileList'>
+
+    <ng-container *ngFor='let file of files.controls; let i = index'>
+
+      <div class='row' [formGroupName]='i'>
+
+        <div class='col-12'>
+
+          <input name='uploadedFile' class='d-none' type='file' [id]='i'
+                 (change)="addFileObject($event, 'file', i)" />
+          <mat-form-field appearance='standard' class='w-75'>
+            <input matInput formControlName='fileName' [required]='false' (click)='triggerFileSelect(i)'
+                   [placeholder]="file.get('fileName')?.value" [readonly]='loadingUploadFile'>
+            <mat-icon matPrefix color='primary'>attach_file</mat-icon>
+          </mat-form-field>
+
+          <button mat-mini-fab (click)='deleteFile(i)' color='warn' class='ms-4' [class.spinner]='loadingUploadFile'
+                  [disabled]='loadingUploadFile'>
+            <mat-icon>delete_forever</mat-icon>
+          </button>
+
+          <button mat-mini-fab (click)='addFile()' class='ms-2' type='button' [class.spinner]='loadingUploadFile'
+                  [disabled]='loadingUploadFile'>
+            <mat-icon>add</mat-icon>
+          </button>
+
+        </div>
+
+      </div>
+
+    </ng-container>
+
+
+    <div class='row'>
+      <div class='col-md-12'>
+        <button mat-raised-button color='primary' [class.spinner]='loadingUploadFile' [disabled]='loadingUploadFile'>
+          ثبت
+        </button>
+      </div>
+    </div>
+
+  </ng-container>
+
+</form>
