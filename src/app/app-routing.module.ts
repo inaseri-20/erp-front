@@ -25,6 +25,12 @@ const routes: Routes = [
     canActivate: [UserGuard, ClientGuard]
   },
   {
+    path: 'task',
+    loadChildren: () => import('./modules/task/task.module').then(m => m.TaskModule),
+    component: AppLayoutComponent,
+    canActivate: [UserGuard]
+  },
+  {
     path: '',
     redirectTo: 'client/dashboard',
     pathMatch: 'full'

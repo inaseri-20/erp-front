@@ -6,10 +6,10 @@
 <app-page-header [pageTitle]="'پروژه ها'"
                  [firstButtonTooltip]="'ایجاد پروژه جدید'"
                  [firstButtonIcon]="'work'"
-                 [secondButtonIcon]="'local_fire_department'"
-                 [secondButtonTooltip]="'ایجاد دپارتمان جدید'"
+                 [secondButtonIcon]="secondTopButtonIcon"
+                 [secondButtonTooltip]="secondTopButtonTooltip"
                  (firstButtonAction)="router.navigate(['/admin/dashboard/project/create'])"
-                 (secondButtonAction)="router.navigate(['/admin/dashboard/department/create'])">
+                 (secondButtonAction)="secondButtonRoute()">
 </app-page-header>
 
 
@@ -22,7 +22,7 @@
 
         <a [routerLink]="['/admin/dashboard/project/create']"
            [queryParams]='{projectId: project.id}'
-           class='text-decoration-none'>
+           class='text-decoration-none' (contextmenu)="openTasks(project.id, $event)">
 
           <mat-card class='shadow shadow-sm border rounded-3'>
 

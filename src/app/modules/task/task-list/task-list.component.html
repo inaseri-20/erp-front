@@ -1,0 +1,78 @@
+<app-page-header [pageTitle]="'تسک ها'"
+                 [firstButtonIcon]="'arrow_back'"
+                 (firstButtonAction)="router.navigate(['/admin/dashboard'])">
+</app-page-header>
+
+<app-no-data *ngIf='tasks.length === 0 && !tasks'
+             [newDataTitle]="'ثبت اولین تسک'"
+             (addNewData)="router.navigate(['/task/create'])">
+</app-no-data>
+
+<div class='row mt-3'>
+  <div class='col-md-10 col-12 mx-auto'>
+
+    <div class='row'>
+
+      <div class='col-md-4 col-12 mt-3' *ngFor='let task of tasks'>
+
+        <a [routerLink]="['/task/create']"
+           [queryParams]='{taskId: task.id}'
+           class='text-decoration-none'>
+
+          <mat-card class='shadow shadow-sm border rounded-3'>
+
+            <mat-card-content>
+
+              <div class='d-flex align-items-center'>
+                <div class='project-avatar'>
+                  <h1
+                    class='text-white text-center d-flex align-items-center align-content-center h-100 justify-content-center mt-1'>
+                    {{task.title.charAt(0)}}</h1>
+                </div>
+                <div class='d-block ms-2'>
+                  <h2 class='m-0'>{{task.title}}</h2>
+                  <span class=' text-muted'>{{task.description || 'توضیحاتی ثبت نشده است'}}</span>
+                </div>
+                <div class='status-avatar ms-auto mb-auto'
+                     [matTooltip]='task.status_name'
+                     [ngStyle]="{'background': task.status_color}"></div>
+              </div>
+
+              <div class='d-block mt-2'>
+                <div class='d-flex align-items-center'>
+                  <button mat-icon-button matTooltip='پروژه'>
+                    <mat-icon class='text-muted'>local_fire_department</mat-icon>
+                  </button>
+                  <span class='text-muted'>{{task?.project?.title}}</span>
+                </div>
+              </div>
+
+              <div class='d-flex align-items-center mt-2'>
+                <div class='d-flex align-items-center'>
+                  <button mat-icon-button matTooltip='محدودیت زمانی'>
+                    <mat-icon class='text-danger'>notifications_active</mat-icon>
+                  </button>
+                  <span class='text-danger'>{{task.dead_line | persianDate}}</span>
+                </div>
+
+                <div class='d-flex align-items-center mx-auto'>
+                  <button mat-icon-button matTooltip='تاریخ شروع'>
+                    <mat-icon class='text-success'>not_started</mat-icon>
+                  </button>
+                  <span class='text-success'>{{task.start_date | persianDate}}</span>
+                </div>
+              </div>
+
+
+            </mat-card-content>
+
+          </mat-card>
+
+        </a>
+
+      </div>
+
+    </div>
+
+  </div>
+</div>
