@@ -14,7 +14,7 @@ export class AdminDashboardComponent implements OnInit {
 
   projects: any[] = [];
   secondTopButtonIcon = 'local_fire_department';
-  secondTopButtonTooltip = 'ایجاد تسک جدید';
+  secondTopButtonTooltip = 'ایجاد دپارتمان جدید';
 
   constructor(private adminDashboardService: AdminDashboardService,
               public router: Router) {
@@ -40,13 +40,13 @@ export class AdminDashboardComponent implements OnInit {
     if (this.userRole.includes('middle')) {
       this.router.navigate(['/task/create']);
     } else {
-      this.router.navigate(['/admin/dashboard/project/create']);
+      this.router.navigate(['/admin/dashboard/department/create']);
     }
   }
 
   openTasks(data: any, event: MouseEvent): void {
     event.preventDefault();
-    this.router.navigate(['/task/' + data]);
+    this.router.navigate(['/task'], { queryParams: { projectId: data } });
   }
 
 }

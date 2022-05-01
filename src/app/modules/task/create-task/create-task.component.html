@@ -56,6 +56,17 @@
             </div>
 
             <div class='col'>
+              <mat-form-field appearance='outline' class='w-100'>
+                <mat-label>نام انجام دهنده تسک</mat-label>
+                <mat-select formControlName='owner' [required]='true'>
+                  <mat-option *ngFor='let user of users' [value]='user.id'>
+                    {{user?.first_name}} {{user?.last_name}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+
+            <div class='col'>
               <app-persian-date-picker [dateControl]="taskForm.get('dead_line')"
                                        datePickerLabel='محدودیت زمانی'
                                        (selectedDate)="setDate($event, 'dead_line')"

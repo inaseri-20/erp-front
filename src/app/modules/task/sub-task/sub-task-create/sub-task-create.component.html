@@ -36,6 +36,17 @@
 
   </div>
 
+  <div class='row'>
+    <hr class='w-100 text-black'>
+    <div class='overflow-hidden'>
+      <h3 class='float-start'>فایل ها</h3>
+      <button mat-mini-fab (click)='addFile()' class='float-end' type='button' [class.spinner]='loadingUploadFile'
+              [disabled]='loadingUploadFile'>
+        <mat-icon>add</mat-icon>
+      </button>
+    </div>
+  </div>
+
   <ng-container formArrayName='fileList'>
 
     <ng-container *ngFor='let file of files.controls; let i = index'>
@@ -52,15 +63,19 @@
             <mat-icon matPrefix color='primary'>attach_file</mat-icon>
           </mat-form-field>
 
-          <button mat-mini-fab (click)='deleteFile(i)' color='warn' class='ms-4' [class.spinner]='loadingUploadFile'
-                  [disabled]='loadingUploadFile'>
-            <mat-icon>delete_forever</mat-icon>
-          </button>
+          <div class='float-end mt-3'>
 
-          <button mat-mini-fab (click)='addFile()' class='ms-2' type='button' [class.spinner]='loadingUploadFile'
-                  [disabled]='loadingUploadFile'>
-            <mat-icon>add</mat-icon>
-          </button>
+            <button mat-mini-fab (click)='deleteFile(i)' color='warn' class='ms-4' [class.spinner]='loadingUploadFile'
+                    [disabled]='loadingUploadFile'>
+              <mat-icon>delete_forever</mat-icon>
+            </button>
+
+            <button mat-mini-fab (click)='addFile()' class='ms-2' type='button' [class.spinner]='loadingUploadFile'
+                    [disabled]='loadingUploadFile'>
+              <mat-icon>add</mat-icon>
+            </button>
+
+          </div>
 
         </div>
 

@@ -47,3 +47,29 @@
   </div>
 
 </div>
+
+<div class='row my-3'>
+
+  <div class='col-md-10 col-12 mx-auto'>
+
+    <mat-selection-list #departmentList>
+      <div mat-subheader>دپارتمان ها</div>
+      <mat-list-option *ngFor='let department of departments' [value]='department.id'>
+        <mat-icon mat-list-icon>folder</mat-icon>
+        <div mat-line>{{department?.title}}</div>
+        <div mat-line> {{departments?.description || 'توضیحاتی ثبت نشده'}} </div>
+      </mat-list-option>
+    </mat-selection-list>
+
+  </div>
+
+</div>
+
+<div class='row my-3' *ngIf='departmentList.selectedOptions.selected.length > 0'>
+
+  <div class='col-md-10 col-12 mx-auto'>
+    <h3 class='my-2'>تعداد موارد انتخاب شده: {{departmentList.selectedOptions.selected.length}}</h3>
+    <button mat-raised-button color='warn' (click)='deleteSelectedDepartment()'>حذف موارد انتخاب شده</button>
+  </div>
+
+</div>

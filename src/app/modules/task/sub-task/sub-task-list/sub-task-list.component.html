@@ -1,9 +1,9 @@
 <app-page-header [pageTitle]="'ساب تسک ها'"
                  [secondButtonIcon]="'loupe'"
                  [secondButtonTooltip]="'افزدن ساب تسک'"
-                 (secondButtonAction)="openCreateSubTask()"
+                 (secondButtonAction)='openCreateSubTask()'
                  [firstButtonIcon]="'cancel'"
-                 (firstButtonAction)="this.dialogRef.close(false)">
+                 (firstButtonAction)='this.dialogRef.close(false)'>
 </app-page-header>
 
 
@@ -14,15 +14,18 @@
       <mat-panel-title>{{subTask?.message}}</mat-panel-title>
       <mat-panel-description>{{subTask?.task?.title}}</mat-panel-description>
     </mat-expansion-panel-header>
+    <hr class='w-100 text-black'>
     <div class='overflow-hidden'>
       <h3 class='float-start'>فایل ها</h3>
       <button mat-icon-button color='accent' (click)='openCreateSubTask(subTask)' class='float-end'>
         <mat-icon>edit</mat-icon>
       </button>
     </div>
-    <mat-chip-list *ngFor='let file of subTask?.files'>
-      <mat-chip color='primary' selected>{{file}}</mat-chip>
-    </mat-chip-list>
+    <div *ngIf='subTask?.files.length > 0'>
+      <mat-chip-list *ngFor='let file of subTask?.files'>
+        <mat-chip color='primary' selected>{{file}}</mat-chip>
+      </mat-chip-list>
+    </div>
   </mat-expansion-panel>
 
 </mat-accordion>

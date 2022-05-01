@@ -29,9 +29,10 @@ export class SubTaskListComponent implements OnInit {
   openCreateSubTask(data?: any): void {
     this.matDialog.open(SubTaskCreateComponent, {
       width: '600px',
-      height: '600px',
       data: { taskId: this.taskId, data }
-    }).afterClosed();
+    }).afterClosed().subscribe((result: any) => {
+      this.getSubTasks();
+    });
   }
 
   getSubTasks(): void {

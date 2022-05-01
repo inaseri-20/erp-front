@@ -5,6 +5,7 @@ import { AdminDashboardService } from '../../../admin-dashboard/admin-dashboard.
 import { SubTaskService } from '../sub-task.service';
 import { AlertService } from '../../../../core/services/alert/alert.service';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { CleanObjectService } from '../../../../core/services/api/clean-object.service';
 
 @Component({
   selector: 'app-sub-task-create',
@@ -24,6 +25,7 @@ export class SubTaskCreateComponent implements OnInit {
               private formBuilder: FormBuilder,
               private subTaskService: SubTaskService,
               private alertService: AlertService,
+              private cleanObjectService: CleanObjectService,
               public dialogRef: MatDialogRef<SubTaskCreateComponent>,
               @Inject(MAT_DIALOG_DATA) public data: any,
               private adminDashboardService: AdminDashboardService) {
@@ -111,14 +113,17 @@ export class SubTaskCreateComponent implements OnInit {
       }
       delete this.subTaskForm.value.fileList;
       delete this.subTaskForm.value.task;
-      this.subTaskService.updateSubTask(this.subTaskForm.value, this.data.data.id).subscribe(
+      const submitData = this.cleanObjectService.clean(this.subTaskForm.value)
+      this.subTaskService.updateSubTask(submitData, this.data.data.id).subscribe(
         response => {
           this.alertService.messageSuccess('عملیات به روز رسانی با موفقیت انجام شد');
           this.dialogRef.close(true);
         }
       );
     } else {
-      this.subTaskService.createSubTask(this.subTaskForm.value).subscribe(
+      delete this.subTaskForm.value.fileList;
+      const submitData = this.cleanObjectService.clean(this.subTaskForm.value)
+      this.subTaskService.createSubTask(submitData).subscribe(
         response => {
           this.dialogRef.close(true);
           this.alertService.messageSuccess('عملیات با موفقیت انجام شد');

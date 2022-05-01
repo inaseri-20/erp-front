@@ -16,6 +16,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { CreateDepartmentComponent } from './create-department/create-department.component';
+import { MatListModule } from '@angular/material/list';
 
 
 @NgModule({
@@ -38,7 +39,8 @@ import { CreateDepartmentComponent } from './create-department/create-department
     MatButtonModule,
     MatIconModule,
     MatTooltipModule,
-    MatExpansionModule
+    MatExpansionModule,
+    MatListModule
   ]
 })
 export class AdminDashboardModule {

@@ -8,6 +8,7 @@ import { ApiInterceptor } from './interceptor/api.interceptor';
 import { MatDialogModule } from '@angular/material/dialog';
 import { PersianNumberPipe } from './pipes/persian-number.pipe';
 import { PersianDatePipe } from './pipes/persian-date.pipe';
+import { CleanObjectService } from './services/api/clean-object.service';
 
 
 @NgModule({
@@ -27,6 +28,7 @@ import { PersianDatePipe } from './pipes/persian-date.pipe';
   providers: [
     MatSnackBar,
     ApiService,
+    CleanObjectService,
     { provide: HTTP_INTERCEPTORS, useClass: ApiInterceptor, multi: true }
   ]
 })

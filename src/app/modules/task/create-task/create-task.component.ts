@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AlertService } from '../../../core/services/alert/alert.service';
 import { TaskService } from '../task.service';
 import { AdminDashboardService } from '../../admin-dashboard/admin-dashboard.service';
+import { CleanObjectService } from '../../../core/services/api/clean-object.service';
 
 @Component({
   selector: 'app-create-task',
@@ -16,12 +17,14 @@ export class CreateTaskComponent implements OnInit {
 
   statuses: any;
   projects: any;
+  users: any;
 
   constructor(public router: Router,
               private taskService: TaskService,
               private formBuilder: FormBuilder,
               private alertService: AlertService,
               public activatedRoute: ActivatedRoute,
+              private cleanObjectService: CleanObjectService,
               private adminDashboardService: AdminDashboardService) {
   }
 
@@ -29,6 +32,7 @@ export class CreateTaskComponent implements OnInit {
     this.getStatues();
     this.getProjects();
     this.createForm();
+    this.getUsers();
     if (this.activatedRoute.snapshot.queryParams['taskId']) {
       this.getTaskDetail();
     }
@@ -40,6 +44,7 @@ export class CreateTaskComponent implements OnInit {
       description: [''],
       status: [],
       project: ['', [Validators.required]],
+      owner: ['', [Validators.required]],
       dead_line: [''],
       start_date: ['']
     });
@@ -70,20 +75,28 @@ export class CreateTaskComponent implements OnInit {
     );
   }
 
+  getUsers(): void {
+    this.adminDashboardService.getClients().subscribe(
+      response => {
+        this.users = response;
+      }, error => this.alertService.messageError(error)
+    );
+  }
 
   submitTask() {
+    const data = this.cleanObjectService.clean(this.taskForm.value);
     if (this.activatedRoute.snapshot.queryParams['taskId']) {
-      this.taskService.updateTask(this.taskForm.value, this.activatedRoute.snapshot.queryParams['taskId']).subscribe(
+      this.taskService.updateTask(data, this.activatedRoute.snapshot.queryParams['taskId']).subscribe(
         response => {
           this.alertService.messageSuccess('تسک با موفقیت به روز رسانی شد');
-          this.router.navigate(['/task/' + this.activatedRoute.snapshot.queryParams['projectId']]);
+          this.router.navigate(['/task']);
         }, error => this.alertService.messageError(error)
       );
     } else {
-      this.taskService.createTask(this.taskForm.value).subscribe(
+      this.taskService.createTask(data).subscribe(
         response => {
           this.alertService.messageSuccess('تسک با موفقیت ذخیره شد');
-          this.router.navigate(['/task/' + this.activatedRoute.snapshot.queryParams['projectId']]);
+          this.router.navigate(['/task']);
         }, error => this.alertService.messageError(error)
       );
     }
