@@ -1,3 +1,5 @@
+@import "src/assets/styles/_colors.scss";
+
 .custom-side-nav {
   width: 6.5rem;
   right: 1.2rem;
@@ -55,4 +57,11 @@
 .viewport {
   height: 350px;
   width: 280px;
+}
+
+.header-style {
+  overflow: hidden;
+  display: inline-block !important;
+  background: $secondary-color;
+  color: white
 }

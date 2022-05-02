@@ -1,8 +1,10 @@
+@import "src/assets/styles/_colors.scss";
+
 .project-avatar {
   width: 5rem;
   height: 5rem;
   overflow: hidden;
-  background: #af80e8;
+  background: $secondary-color;
   border-radius: 50%;
 }
 

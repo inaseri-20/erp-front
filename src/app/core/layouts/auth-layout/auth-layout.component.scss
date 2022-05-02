@@ -1,4 +1,7 @@
-.bg-yellow {
+@import "src/assets/styles/_colors.scss";
+
+
+.auth-background {
   min-height: 100vh;
-  background: #f9c700;
+  background: $secondary-color
 }
