@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 import { DashboardRoutingModule } from './dashboard-routing.module';
 import { ShareModule } from '../../share/share.module';
 import { CoreModule } from '../../core/core.module';
@@ -19,14 +19,16 @@ import { CreateDepartmentComponent } from './create-department/create-department
 import { MatListModule } from '@angular/material/list';
 import { AssignUserToDepartmentComponent } from './assign-user-to-department/assign-user-to-department.component';
 import { MatMenuModule } from '@angular/material/menu';
+import { ClientListComponent } from './client-list/client-list.component';
 
 
 @NgModule({
   declarations: [
-    AdminDashboardComponent,
+    DashboardComponent,
     CreateProjectComponent,
     CreateDepartmentComponent,
-    AssignUserToDepartmentComponent
+    AssignUserToDepartmentComponent,
+    ClientListComponent
   ],
   imports: [
     CommonModule,

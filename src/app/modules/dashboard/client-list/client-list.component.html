@@ -1,0 +1,17 @@
+<app-page-header [pageTitle]="'ایجاد دپارتمان'"
+                 [firstButtonIcon]="'arrow_back'"
+                 (firstButtonAction)="router.navigate(['/admin/dashboard'])">
+</app-page-header>
+
+<div class='row mt-4'>
+
+  <div class='col-md-10 col-12 mx-auto'>
+
+    <app-table [data]='data' class='w-100'
+               [columns]='columns'
+               [selfPagination]='true'>
+    </app-table>
+
+  </div>
+
+</div>

@@ -39,8 +39,8 @@ export class DashboardService {
     return this.apiService.get(`${this.projectBaseApi}status`);
   }
 
-  getClients(): Observable<any> {
-    return this.apiService.get(this.clientBaseApi);
+  getClients(filter?: any): Observable<any> {
+    return this.apiService.get(this.clientBaseApi, null, filter);
   }
 
   getDepartments(): Observable<any> {

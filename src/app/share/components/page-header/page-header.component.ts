@@ -15,8 +15,12 @@ export class PageHeaderComponent implements OnInit {
   @Input() secondButtonIcon: any;
   @Input() secondButtonTooltip: any;
 
+  @Input() thirdButtonIcon: any;
+  @Input() thirdButtonTooltip: any;
+
   @Output() firstButtonAction: EventEmitter<any> = new EventEmitter<any>();
   @Output() secondButtonAction: EventEmitter<any> = new EventEmitter<any>();
+  @Output() thirdButtonAction: EventEmitter<any> = new EventEmitter<any>();
 
   constructor() {
   }

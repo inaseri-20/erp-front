@@ -1,20 +1,22 @@
 import { Component, OnInit } from '@angular/core';
 import { DashboardService } from '../dashboard.service';
 import { Router } from '@angular/router';
-import jwt_decode from 'jwt-decode';
 
 @Component({
   selector: 'app-dashboard',
-  templateUrl: './admin-dashboard.component.html',
-  styleUrls: ['./admin-dashboard.component.scss']
+  templateUrl: './dashboard.component.html',
+  styleUrls: ['./dashboard.component.scss']
 })
-export class AdminDashboardComponent implements OnInit {
+export class DashboardComponent implements OnInit {
 
   userRole = JSON.stringify(localStorage.getItem('group'));
 
   projects: any[] = [];
   secondTopButtonIcon = 'local_fire_department';
   secondTopButtonTooltip = 'ایجاد دپارتمان جدید';
+
+  thirdTopButtonIcon = 'recent_actors';
+  thirdTopButtonTooltip = 'لیست کاربران';
 
   constructor(private dashboardService: DashboardService,
               public router: Router) {
@@ -25,6 +27,7 @@ export class AdminDashboardComponent implements OnInit {
       this.secondTopButtonTooltip = 'ایجاد تسک جدید';
       this.secondTopButtonIcon = 'add_task';
     }
+
     this.getProjects();
   }
 

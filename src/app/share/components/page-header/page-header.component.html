@@ -15,6 +15,13 @@
               (click)='secondButtonAction.emit()' class='float-end mx-2'>
         <mat-icon>{{secondButtonIcon}}</mat-icon>
       </button>
+
+      <button mat-icon-button
+              [matTooltip]='thirdButtonTooltip'
+              *ngIf='thirdButtonIcon'
+              (click)='thirdButtonAction.emit()' class='float-end mx-2'>
+        <mat-icon>{{thirdButtonIcon}}</mat-icon>
+      </button>
     </div>
   </div>
 </div>
