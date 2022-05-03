@@ -37,7 +37,10 @@ export class LoginComponent implements OnInit {
         this.alertService.messageSuccess(response.msg);
         this.loading = false;
         this.router.navigate(['/auth/verify/' + this.loginForm.value.username]);
-      }, error => this.alertService.messageError(error)
+      }, error => {
+        this.alertService.messageError(error);
+        this.loading = false;
+      }
     );
   }
 }

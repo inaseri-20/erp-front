@@ -1,15 +1,10 @@
 <mat-toolbar>
   <mat-toolbar-row class='header-style'>
 
-<!--    <button mat-icon-button class='menu-btn mt-3 mb-1 float-start' (click)='toggleMenu()' id='side-menu'>-->
-<!--      <mat-icon class='mat-18'>-->
-<!--        {{(this.sideExpand) ? 'arrow_forward' : 'menu'}}-->
-<!--      </mat-icon>-->
-<!--    </button>-->
-
     <button mat-icon-button class='mt-3 mb-1 float-end' [matMenuTriggerFor]='menu'>
       <mat-icon>person</mat-icon>
     </button>
+    <div class='mt-4 mb-1 float-end mx-2' > {{userFullName}}</div>
 
     <mat-menu #menu='matMenu'>
       <button mat-menu-item (click)='logout()'>
@@ -26,9 +21,9 @@
 
   <mat-sidenav-container style='min-height: 100vh'>
 
-<!--    <mat-sidenav #sidenav [mode]='navMode' [(opened)]='sideExpand' class='custom-side-nav'>-->
-<!--      <app-sidebar (closeNav)='sidenav.close()'></app-sidebar>-->
-<!--    </mat-sidenav>-->
+    <!--    <mat-sidenav #sidenav [mode]='navMode' [(opened)]='sideExpand' class='custom-side-nav'>-->
+    <!--      <app-sidebar (closeNav)='sidenav.close()'></app-sidebar>-->
+    <!--    </mat-sidenav>-->
 
     <mat-sidenav-content>
 

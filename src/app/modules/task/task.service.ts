@@ -32,4 +32,8 @@ export class TaskService {
   getTaskDetail(taskId: any): Observable<any> {
     return this.apiService.get(`${this.taskBaseApi}${taskId}/`);
   }
+
+  getStatues(): Observable<any> {
+    return this.apiService.get(`${this.taskBaseApi}status/`);
+  }
 }

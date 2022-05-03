@@ -6,10 +6,10 @@
 <app-page-header [pageTitle]="'پروژه ها'"
                  [firstButtonTooltip]="'ایجاد پروژه جدید'"
                  [firstButtonIcon]="'work'"
-                 [secondButtonIcon]="secondTopButtonIcon"
-                 [secondButtonTooltip]="secondTopButtonTooltip"
+                 [secondButtonIcon]='secondTopButtonIcon'
+                 [secondButtonTooltip]='secondTopButtonTooltip'
                  (firstButtonAction)="router.navigate(['/admin/dashboard/project/create'])"
-                 (secondButtonAction)="secondButtonRoute()">
+                 (secondButtonAction)='secondButtonRoute()'>
 </app-page-header>
 
 
@@ -20,9 +20,7 @@
 
       <div class='col-md-4 col-12 mt-3' *ngFor='let project of projects'>
 
-        <a [routerLink]="['/admin/dashboard/project/create']"
-           [queryParams]='{projectId: project.id}'
-           class='text-decoration-none' (contextmenu)="openTasks(project.id, $event)">
+        <a class='text-decoration-none' [matMenuTriggerFor]="menu" style='cursor: pointer;'>
 
           <mat-card class='shadow shadow-sm border rounded-3'>
 
@@ -70,6 +68,11 @@
 
 
             </mat-card-content>
+
+            <mat-menu #menu='matMenu'>
+              <button mat-menu-item [routerLink]="['/admin/dashboard/project/create']" [queryParams]='{projectId: project.id}'>ویرایش پروژه</button>
+              <button mat-menu-item (click)='openTasks(project.id, $event)'>مشاهده تسک ها</button>
+            </mat-menu>
 
           </mat-card>
 

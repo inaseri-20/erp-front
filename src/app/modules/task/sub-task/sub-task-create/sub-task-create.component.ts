@@ -52,7 +52,7 @@ export class SubTaskCreateComponent implements OnInit {
 
   createForm(): void {
     this.subTaskForm = this.formBuilder.group({
-      user: ['', [Validators.required]],
+      assign: ['', [Validators.required]],
       task: [this.data.taskId, [Validators.required]],
       message: ['', [Validators.required]],
       fileList: this.formBuilder.array([])

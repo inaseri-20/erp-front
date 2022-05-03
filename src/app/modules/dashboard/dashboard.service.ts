@@ -50,4 +50,8 @@ export class DashboardService {
   creatDepartment(data: any): Observable<any> {
     return this.apiService.post(this.departmentBaseApi, null, null, data);
   }
+
+  assignUserToDepartment(data: any): Observable<any> {
+    return this.apiService.post(`${this.departmentBaseApi}assign/user/`, null, null, data);
+  }
 }

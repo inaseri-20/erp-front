@@ -4,6 +4,8 @@ import { DashboardService } from '../dashboard.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AlertService } from '../../../core/services/alert/alert.service';
 import { MatSelectionList } from '@angular/material/list';
+import { MatDialog } from '@angular/material/dialog';
+import { AssignUserToDepartmentComponent } from '../assign-user-to-department/assign-user-to-department.component';
 
 @Component({
   selector: 'app-create-department',
@@ -21,7 +23,8 @@ export class CreateDepartmentComponent implements OnInit {
               private formBuilder: FormBuilder,
               private alertService: AlertService,
               private activatedRoute: ActivatedRoute,
-              private dashboardService: DashboardService) {
+              private dashboardService: DashboardService,
+              private matDialog: MatDialog) {
   }
 
   ngOnInit(): void {
@@ -46,13 +49,10 @@ export class CreateDepartmentComponent implements OnInit {
       response => {
         this.departments = response;
       }
-    )
+    );
   }
 
-  deleteSelectedDepartment(): void {
-    for (let i = 0; i < this.departmentSelectedList.selectedOptions.selected.length; i++) {
-      console.log(this.departmentSelectedList.selectedOptions.selected[i].value);
-    }
+  openAssignUser(department: any): void {
+    this.matDialog.open(AssignUserToDepartmentComponent, { width: '600px', data: department });
   }
-
 }

@@ -44,7 +44,7 @@ export class CreateTaskComponent implements OnInit {
       description: [''],
       status: [],
       project: ['', [Validators.required]],
-      owner: ['', [Validators.required]],
+      assign: ['', [Validators.required]],
       dead_line: [''],
       start_date: ['']
     });

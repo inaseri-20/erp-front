@@ -40,6 +40,7 @@ export class VerifyComponent implements OnInit {
         localStorage.setItem('erpAccessToken', response.access);
         localStorage.setItem('erpRefreshToken', response.refresh);
         localStorage.setItem('group', response.group);
+        localStorage.setItem('erpUserFullName', response.full_name);
 
         if (response.group.includes('client')) {
           this.router.navigate(['/task']);
@@ -48,7 +49,10 @@ export class VerifyComponent implements OnInit {
         }
 
         this.alertService.messageSuccess(response.msg);
-      }, error => this.alertService.messageError(error)
+      }, error => {
+        this.loading = false;
+        this.alertService.messageError(error);
+      }
     );
   }
 
@@ -58,7 +62,10 @@ export class VerifyComponent implements OnInit {
       response => {
         this.loading = false;
         this.alertService.messageSuccess(response.msg);
-      }, error => this.alertService.messageError(error)
+      }, error => {
+        this.alertService.messageError(error);
+        this.loading = false;
+      }
     );
   }
 }

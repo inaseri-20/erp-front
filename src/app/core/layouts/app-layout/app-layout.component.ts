@@ -17,6 +17,8 @@ export class AppLayoutComponent implements OnInit, OnChanges {
 
   navMode: MatDrawerMode = 'side';
 
+  userFullName: any;
+
   constructor(private dialog: MatDialog,
               private appLayoutService: AppLayoutService,
               public router: Router) {
@@ -32,6 +34,7 @@ export class AppLayoutComponent implements OnInit, OnChanges {
     if (window.innerWidth < 600) {
       this.sideExpand = false;
     }
+    this.userFullName = localStorage.getItem('erpUserFullName') + ' - ' + localStorage.getItem('group');
   }
 
   toggleMenu(): void {

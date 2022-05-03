@@ -17,13 +17,16 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { CreateDepartmentComponent } from './create-department/create-department.component';
 import { MatListModule } from '@angular/material/list';
+import { AssignUserToDepartmentComponent } from './assign-user-to-department/assign-user-to-department.component';
+import { MatMenuModule } from '@angular/material/menu';
 
 
 @NgModule({
   declarations: [
     AdminDashboardComponent,
     CreateProjectComponent,
-    CreateDepartmentComponent
+    CreateDepartmentComponent,
+    AssignUserToDepartmentComponent
   ],
   imports: [
     CommonModule,
@@ -40,7 +43,8 @@ import { MatListModule } from '@angular/material/list';
     MatIconModule,
     MatTooltipModule,
     MatExpansionModule,
-    MatListModule
+    MatListModule,
+    MatMenuModule
   ]
 })
 export class DashboardModule {

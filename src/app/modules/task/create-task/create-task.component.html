@@ -57,8 +57,8 @@
 
             <div class='col'>
               <mat-form-field appearance='outline' class='w-100'>
-                <mat-label>نام انجام دهنده تسک</mat-label>
-                <mat-select formControlName='owner' [required]='true'>
+                <mat-label>انتساب به</mat-label>
+                <mat-select formControlName='assign' [required]='true'>
                   <mat-option *ngFor='let user of users' [value]='user.id'>
                     {{user?.first_name}} {{user?.last_name}}
                   </mat-option>

@@ -14,12 +14,17 @@ import { MatInputModule } from '@angular/material/input';
 import { TaskListComponent } from './task-list/task-list.component';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatIconModule } from '@angular/material/icon';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { TasksDataComponent } from './task-list/tasks-data/tasks-data.component';
+import { MatTabsModule } from '@angular/material/tabs';
 
 
 @NgModule({
   declarations: [
     CreateTaskComponent,
-    TaskListComponent
+    TaskListComponent,
+    TasksDataComponent
   ],
   imports: [
     CommonModule,
@@ -34,7 +39,10 @@ import { MatIconModule } from '@angular/material/icon';
     PersianDatePickerModule,
     MatInputModule,
     MatTooltipModule,
-    MatIconModule
+    MatIconModule,
+    MatMenuModule,
+    MatExpansionModule,
+    MatTabsModule
   ]
 })
 export class TaskModule {

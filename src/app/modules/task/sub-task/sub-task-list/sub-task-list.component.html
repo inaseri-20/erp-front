@@ -12,7 +12,10 @@
   <mat-expansion-panel class='my-2' *ngFor='let subTask of subTasks'>
     <mat-expansion-panel-header>
       <mat-panel-title>{{subTask?.message}}</mat-panel-title>
-      <mat-panel-description>{{subTask?.task?.title}}</mat-panel-description>
+      <mat-panel-description>
+        <div *ngIf='subTask?.onwer'>ایجاد شده توسط من</div>
+        <div *ngIf='subTask?.assignee === true'>انتساب داده شده به من</div>
+      </mat-panel-description>
     </mat-expansion-panel-header>
     <hr class='w-100 text-black'>
     <div class='overflow-hidden'>

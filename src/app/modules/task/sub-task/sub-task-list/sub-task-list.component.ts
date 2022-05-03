@@ -36,10 +36,26 @@ export class SubTaskListComponent implements OnInit {
   }
 
   getSubTasks(): void {
-    const filter = { task: this.taskId };
+    const temp: any = [];
+    let filter: any = { task: this.taskId, assign: true };
     this.subTaskService.getSubTasks(filter).subscribe(
       response => {
-        this.subTasks = response;
+        response.map((el: any) => {
+          el.assignee = true;
+          el.owner = false;
+          temp.push(el);
+        });
+        filter = { task: this.taskId, owner: true };
+        this.subTaskService.getSubTasks(filter).subscribe(
+          response => {
+            response.map((el: any) => {
+              el.assignee = false;
+              el.owner = true;
+              temp.push(el);
+            });
+            this.subTasks = temp;
+          }
+        );
       }
     );
   }
