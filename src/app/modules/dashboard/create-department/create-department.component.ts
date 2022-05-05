@@ -53,6 +53,6 @@ export class CreateDepartmentComponent implements OnInit {
   }
 
   openAssignUser(department: any): void {
-    this.matDialog.open(AssignUserToDepartmentComponent, { width: '600px', data: department });
+    this.matDialog.open(AssignUserToDepartmentComponent, { width: '800px', data: department });
   }
 }

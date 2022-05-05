@@ -54,4 +54,12 @@ export class DashboardService {
   assignUserToDepartment(data: any): Observable<any> {
     return this.apiService.post(`${this.departmentBaseApi}assign/user/`, null, null, data);
   }
+
+  getDepartmentUsers(filters: any): Observable<any> {
+    return this.apiService.get(`${this.departmentBaseApi}assign/user/`, null, filters);
+  }
+
+  deleteDepartmentUser(filters: any): Observable<any> {
+    return this.apiService.delete(`${this.departmentBaseApi}assign/user/`, null, filters);
+  }
 }
