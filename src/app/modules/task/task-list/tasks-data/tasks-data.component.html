@@ -14,9 +14,14 @@
                 class='text-white text-center d-flex align-items-center align-content-center h-100 justify-content-center mt-1'>
                 {{task.title.charAt(0)}}</h1>
             </div>
+
             <div class='d-block ms-2'>
               <h2 class='m-0'>{{task.title}}</h2>
-              <span class=' text-muted'>{{task.description || 'توضیحاتی ثبت نشده است'}}</span>
+              <div class='d-flex'>
+                <span class=' text-muted'>{{task.description || 'توضیحاتی ثبت نشده است'}}</span>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <span class=' text-muted' [matTooltip]="'انتساب داده'">({{task.assignee_full_name}})</span>
+              </div>
             </div>
             <div class='status-avatar ms-auto mb-auto'
                  [matTooltip]='task.status_name'
