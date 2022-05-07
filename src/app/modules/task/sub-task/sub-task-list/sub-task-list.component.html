@@ -10,25 +10,39 @@
 <mat-accordion>
 
   <mat-expansion-panel class='my-2' *ngFor='let subTask of subTasks'>
+
     <mat-expansion-panel-header>
-      <mat-panel-title>{{subTask?.message}}</mat-panel-title>
-      <mat-panel-description>
-        <div *ngIf='subTask?.onwer'>ایجاد شده توسط من</div>
-        <div *ngIf='subTask?.assignee === true'>انتساب داده شده به من</div>
+      <mat-panel-title>
+
+        <div class='status-avatar me-2'
+             [matTooltip]='subTask.status_name'
+             [ngStyle]="{'background': subTask.status_color}">
+        </div>
+
+        {{subTask?.message}}
+
+      </mat-panel-title>
+      <mat-panel-description class='d-flex'>
+        <div style='font-size: 10px'>{{subTask?.assignee}}</div>
+        <div style='font-size: 10px' class='ms-auto'>{{subTask?.owner}}</div>
       </mat-panel-description>
     </mat-expansion-panel-header>
+
     <hr class='w-100 text-black'>
+
     <div class='overflow-hidden'>
       <h3 class='float-start'>فایل ها</h3>
       <button mat-icon-button color='accent' (click)='openCreateSubTask(subTask)' class='float-end'>
         <mat-icon>edit</mat-icon>
       </button>
     </div>
+
     <div *ngIf='subTask?.files.length > 0'>
       <mat-chip-list *ngFor='let file of subTask?.files'>
         <mat-chip color='primary' selected>{{file}}</mat-chip>
       </mat-chip-list>
     </div>
+
   </mat-expansion-panel>
 
 </mat-accordion>

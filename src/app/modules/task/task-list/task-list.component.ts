@@ -29,7 +29,7 @@ export class TaskListComponent implements OnInit {
     if (this.userRole.includes('main') && !this.activatedRoute.snapshot.queryParams['userId']) {
       this.getAllTasks();
     } else if (this.userRole.includes('main') || this.userRole.includes('mid') && this.activatedRoute.snapshot.queryParams['userId']) {
-      this.getAllTasks(this.activatedRoute.snapshot.queryParams['userId'])
+      this.getAllTasks(this.activatedRoute.snapshot.queryParams['userId']);
     } else {
       this.getMyCreatedTasks();
       this.getMyAssigneeTasks();
@@ -40,11 +40,15 @@ export class TaskListComponent implements OnInit {
     let queryParams: any = { owner: true };
     if (this.projectId) queryParams['projectId'] = this.projectId;
     if (statusIndex) queryParams['status'] = this.statuses[statusIndex - 1].id;
-    this.taskService.getProjectTasks(queryParams).subscribe(
-      response => {
-        this.myCreatedTasks = response;
-      }
-    );
+    if (this.userRole.includes('main')) {
+      this.getAllTasks(this.activatedRoute.snapshot.queryParams['userId'], statusIndex);
+    } else {
+      this.taskService.getProjectTasks(queryParams).subscribe(
+        response => {
+          this.myCreatedTasks = response;
+        }
+      );
+    }
   }
 
   getMyAssigneeTasks(statusIndex?: any): void {
@@ -58,13 +62,16 @@ export class TaskListComponent implements OnInit {
     );
   }
 
-  getAllTasks(userId?: any): void {
+  getAllTasks(userId?: any, statusId?: any): void {
+    this.allTasks = [];
     let queryParams: any = {};
     if (this.projectId) queryParams['projectId'] = this.projectId;
     if (userId) queryParams['user'] = userId;
+    if (statusId) queryParams['status'] = statusId;
     this.taskService.getProjectTasks(queryParams).subscribe(
       response => {
         this.allTasks = response;
+        console.log(this.allTasks);
       }
     );
   }

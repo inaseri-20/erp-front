@@ -9,23 +9,19 @@
         <mat-card-content>
 
           <div class='d-flex align-items-center'>
-            <div class='project-avatar'>
-              <h1
-                class='text-white text-center d-flex align-items-center align-content-center h-100 justify-content-center mt-1'>
-                {{task.title.charAt(0)}}</h1>
-            </div>
 
             <div class='d-block ms-2'>
               <h2 class='m-0'>{{task.title}}</h2>
               <div class='d-flex'>
                 <span class=' text-muted'>{{task.description || 'توضیحاتی ثبت نشده است'}}</span>
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <span class=' text-muted' [matTooltip]="'انتساب داده'">({{task.assignee_full_name}})</span>
               </div>
             </div>
-            <div class='status-avatar ms-auto mb-auto'
+
+
+            <div class='status-avatar mb-auto ms-auto'
                  [matTooltip]='task.status_name'
                  [ngStyle]="{'background': task.status_color}"></div>
+
           </div>
 
           <div class='d-block mt-2'>
@@ -51,6 +47,14 @@
               </button>
               <span class='text-success'>{{task.start_date | persianDate}}</span>
             </div>
+          </div>
+
+          <div class='overflow-hidden mt-2'>
+
+            <span class='text-muted float-start ms-3' style='font-size: 10px;' [matTooltip]="task.assigneeTooltip">({{task.assignee_full_name}})</span>
+
+            <span class='text-muted float-end me-2' style='font-size: 10px;' [matTooltip]="task.ownerTooltip">({{task.owner_full_name}})</span>
+
           </div>
 
 

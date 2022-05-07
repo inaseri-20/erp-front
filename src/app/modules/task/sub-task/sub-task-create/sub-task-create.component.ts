@@ -6,6 +6,7 @@ import { SubTaskService } from '../sub-task.service';
 import { AlertService } from '../../../../core/services/alert/alert.service';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { CleanObjectService } from '../../../../core/services/api/clean-object.service';
+import { TaskService } from '../../task.service';
 
 @Component({
   selector: 'app-sub-task-create',
@@ -19,6 +20,7 @@ export class SubTaskCreateComponent implements OnInit {
 
   users: any;
   loadingUploadFile = false;
+  statuses: any;
 
   constructor(public router: Router,
               public activatedRoute: ActivatedRoute,
@@ -26,6 +28,7 @@ export class SubTaskCreateComponent implements OnInit {
               private subTaskService: SubTaskService,
               private alertService: AlertService,
               private cleanObjectService: CleanObjectService,
+              private taskService: TaskService,
               public dialogRef: MatDialogRef<SubTaskCreateComponent>,
               @Inject(MAT_DIALOG_DATA) public data: any,
               private dashboardService: DashboardService) {
@@ -34,6 +37,7 @@ export class SubTaskCreateComponent implements OnInit {
   ngOnInit(): void {
     this.createForm();
     this.getUsers();
+    this.getTaskStatuses();
     if (this.data.data) {
       this.subTaskForm.patchValue(this.data.data);
       const files: any = [];
@@ -55,6 +59,7 @@ export class SubTaskCreateComponent implements OnInit {
       assign: ['', [Validators.required]],
       task: [this.data.taskId, [Validators.required]],
       message: ['', [Validators.required]],
+      status: ['', [Validators.required]],
       fileList: this.formBuilder.array([])
     });
   }
@@ -130,6 +135,14 @@ export class SubTaskCreateComponent implements OnInit {
         }, error => this.alertService.messageError(error)
       );
     }
+  }
+
+  getTaskStatuses(): void {
+    this.taskService.getStatues().subscribe(
+      response => {
+        this.statuses = response;
+      }
+    );
   }
 
 
