@@ -49,7 +49,8 @@ ingress:
     cert-manager.io/issuer: "letsencrypt-prod"
   hosts:
     - host: erp.vidone.ir
-      paths: ["/"]
+      paths:
+      - path: /
 
   tls:
   - hosts:
