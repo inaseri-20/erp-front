@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiUrl: 'https://erp.vidone.ir/api/'
+  apiUrl: 'https://api.erp.vidone.ir/api/'
 };
