@@ -1,0 +1,22 @@
+deploy:
+  stage: deploy
+  variables:
+    PROJ_DIR: "."
+    IMAGE_ID: "scr.vidone.ir/vidone/erp-front:"
+  only:
+    refs:
+      - master
+    changes:
+      - cicd/erp-front/version.txt
+  environment:
+    name: $PROJECT_NAME
+  dependencies:
+    - build_all
+  script:
+    - pwd
+    - VERSION=$(cat cicd/erp-front/version.txt)
+    - IMAGE_TAG=$IMAGE_ID$VERSION
+    - docker build -t $IMAGE_TAG .
+    - docker push $IMAGE_TAG
+    - echo $IMAGE_TAG
+    - helm upgrade --install erp cicd/erp-front --set image.tag=$VERSION -f cicd/erp-front/values.yaml
