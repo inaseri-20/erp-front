@@ -49,11 +49,14 @@
             </div>
           </div>
 
-          <div class='overflow-hidden mt-2'>
+          <div class='d-flex mt-2'>
 
-            <span class='text-muted float-start ms-3' style='font-size: 10px;' [matTooltip]="task.assigneeTooltip">({{task.assignee_full_name}})</span>
 
-            <span class='text-muted float-end me-2' style='font-size: 10px;' [matTooltip]="task.ownerTooltip">({{task.owner_full_name}})</span>
+            <span class='text-muted float-end ms-3' style='font-size: 10px;' [matTooltip]="task.ownerTooltip">({{task.owner_full_name}})</span>
+
+            <mat-icon class=''>arrow_left</mat-icon>
+
+            <span class='text-muted float-start' style='font-size: 10px;' [matTooltip]="task.assigneeTooltip">({{task.assignee_full_name}})</span>
 
           </div>
 

@@ -23,21 +23,23 @@
 
       </mat-panel-title>
       <mat-panel-description class='d-flex'>
+        <div style='font-size: 10px' >{{subTask?.owner}}</div>
+        <mat-icon>arrow_left</mat-icon>
         <div style='font-size: 10px'>{{subTask?.assignee}}</div>
-        <div style='font-size: 10px' class='ms-auto'>{{subTask?.owner}}</div>
       </mat-panel-description>
     </mat-expansion-panel-header>
 
     <hr class='w-100 text-black'>
 
     <div class='overflow-hidden'>
-      <h3 class='float-start'>فایل ها</h3>
+      <h3 class='float-start'>فایل</h3>
       <button mat-icon-button color='accent' (click)='openCreateSubTask(subTask)' class='float-end'>
         <mat-icon>edit</mat-icon>
       </button>
     </div>
 
     <div *ngIf='subTask?.files.length > 0'>
+
       <mat-chip-list *ngFor='let file of subTask?.files'>
         <mat-chip color='primary' selected>{{file}}</mat-chip>
       </mat-chip-list>
