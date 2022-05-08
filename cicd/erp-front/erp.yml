@@ -19,4 +19,4 @@ deploy:
     - docker build -t $IMAGE_TAG .
     - docker push $IMAGE_TAG
     - echo $IMAGE_TAG
-    - helm upgrade --install erp cicd/erp-front --set image.tag=$VERSION -f cicd/erp-front/values.yaml
+    - helm upgrade --install erp-front cicd/erp-front --set image.tag=$VERSION -f cicd/erp-front/values.yaml
