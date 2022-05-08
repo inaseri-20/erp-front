@@ -41,7 +41,7 @@
     <div *ngIf='subTask?.files.length > 0'>
 
       <mat-chip-list *ngFor='let file of subTask?.files'>
-        <mat-chip color='primary' selected>{{file}}</mat-chip>
+        <mat-chip color='primary' selected (click)='download(file)'>{{file}}</mat-chip>
       </mat-chip-list>
     </div>
 

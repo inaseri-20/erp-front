@@ -60,4 +60,11 @@ export class SubTaskListComponent implements OnInit {
     );
   }
 
+  download(file: string): void {
+    this.subTaskService.getDownloadLink(file).subscribe(
+      response => {
+        window.open(response?.download_link, '_blank')
+      }
+    );
+  }
 }

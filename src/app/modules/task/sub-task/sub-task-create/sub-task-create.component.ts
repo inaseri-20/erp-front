@@ -7,6 +7,9 @@ import { AlertService } from '../../../../core/services/alert/alert.service';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { CleanObjectService } from '../../../../core/services/api/clean-object.service';
 import { TaskService } from '../../task.service';
+import { environment } from '../../../../../environments/environment';
+import { ApiService } from '../../../../core/services/api/api.service';
+import { BigUploaderService } from '../../../../core/pipes/big-uploader.service';
 
 @Component({
   selector: 'app-sub-task-create',
@@ -22,6 +25,9 @@ export class SubTaskCreateComponent implements OnInit {
   loadingUploadFile = false;
   statuses: any;
 
+  fileUploaded = 0;
+  showUploader = false;
+
   constructor(public router: Router,
               public activatedRoute: ActivatedRoute,
               private formBuilder: FormBuilder,
@@ -29,7 +35,9 @@ export class SubTaskCreateComponent implements OnInit {
               private alertService: AlertService,
               private cleanObjectService: CleanObjectService,
               private taskService: TaskService,
+              private bigUploaderService: BigUploaderService,
               public dialogRef: MatDialogRef<SubTaskCreateComponent>,
+              private apiService: ApiService,
               @Inject(MAT_DIALOG_DATA) public data: any,
               private dashboardService: DashboardService) {
   }
@@ -88,24 +96,6 @@ export class SubTaskCreateComponent implements OnInit {
     );
   }
 
-  async addFileObject(files: any, formControlName: string, index: number): Promise<any> {
-    this.loadingUploadFile = true;
-    files = files?.target?.files;
-    this.files.at(index).get('fileName')?.setValue(files.item(0).name);
-    this.files.at(index).get('file')?.setValue(files.item(0));
-    const formData = new FormData();
-    formData.append('file', this.files.at(index).get('file')?.value);
-    this.subTaskService.uploadFile(formData).subscribe(
-      response => {
-        this.loadingUploadFile = false;
-        this.uploadedFileNames.push(response.name);
-      }, error => {
-        this.alertService.messageError('دربارگذاری فایل خطایی رخ داده است');
-        this.loadingUploadFile = false;
-      }
-    );
-  }
-
   triggerFileSelect(id: number): void {
     document.getElementById(id.toString())?.click();
   }
@@ -118,7 +108,7 @@ export class SubTaskCreateComponent implements OnInit {
       }
       delete this.subTaskForm.value.fileList;
       delete this.subTaskForm.value.task;
-      const submitData = this.cleanObjectService.clean(this.subTaskForm.value)
+      const submitData = this.cleanObjectService.clean(this.subTaskForm.value);
       this.subTaskService.updateSubTask(submitData, this.data.data.id).subscribe(
         response => {
           this.alertService.messageSuccess('عملیات به روز رسانی با موفقیت انجام شد');
@@ -127,7 +117,7 @@ export class SubTaskCreateComponent implements OnInit {
       );
     } else {
       delete this.subTaskForm.value.fileList;
-      const submitData = this.cleanObjectService.clean(this.subTaskForm.value)
+      const submitData = this.cleanObjectService.clean(this.subTaskForm.value);
       this.subTaskService.createSubTask(submitData).subscribe(
         response => {
           this.dialogRef.close(true);
@@ -143,6 +133,42 @@ export class SubTaskCreateComponent implements OnInit {
         this.statuses = response;
       }
     );
+  }
+
+  async addFileObject(files: any, formControlName: string, index: number): Promise<any> {
+    files = files?.target?.files;
+    this.bigUploaderService.uploaded$.subscribe((results: any) => {
+      if (results) {
+        this.fileUploaded = results;
+      }
+    });
+    const queryParams = {
+      file_name: files.item(0)?.name.toString(),
+      size: files.item(0)?.size.toString()
+    };
+    this.files.disable();
+    this.files.at(index).get('fileName')?.setValue(files.item(0)?.name.toString());
+    this.showUploader = true;
+    const video = await this.uploadFile(queryParams, files.item(0), '4000000');
+    this.files.enable();
+    this.showUploader = false;
+    this.files.at(index).get('file')?.patchValue(video.key);
+    this.uploadedFileNames.push(files.item(0)?.name.toString());
+  }
+
+  async uploadFile(queryParams: any, file: any, chunkSize: string): Promise<any> {
+    const key = await this.apiService.get(`${environment.apiUrl}file/create_key/`, null, queryParams).toPromise();
+    const data = { key: key.key, chunk_size: chunkSize };
+    const fileSize = await this.taskService.getFileSize(data).toPromise();
+    const currentStep = Math.round(fileSize.step);
+
+    if (currentStep && currentStep !== 0) {
+      await this.bigUploaderService.uploadFileAgain(file, key.key, fileSize.size, Number(chunkSize));
+    } else {
+      await this.bigUploaderService.uploadFile(file, key.key, Number(chunkSize));
+    }
+
+    return { key: key.key };
   }
 
 

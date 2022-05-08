@@ -68,23 +68,25 @@
 
         <div class='col-12'>
 
-          <input name='uploadedFile' class='d-none' type='file' [id]='i'
-                 (change)="addFileObject($event, 'file', i)" />
+
+<!--          <input name='uploadedFile' class='d-none' type='file' [id]='i'-->
+<!--                 (change)="addFileObject($event, 'file', i)" />-->
           <mat-form-field appearance='standard' class='w-75'>
             <input matInput formControlName='fileName' [required]='false' (click)='triggerFileSelect(i)'
                    [placeholder]="file.get('fileName')?.value" [readonly]='loadingUploadFile'>
             <mat-icon matPrefix color='primary'>attach_file</mat-icon>
           </mat-form-field>
 
+          <input name="uploadedFile" class="d-none" type="file" [id]="i" (change)="addFileObject($event, 'file', i)"/>
+
+
           <div class='float-end mt-3'>
 
-            <button mat-mini-fab (click)='deleteFile(i)' color='warn' class='ms-4' [class.spinner]='loadingUploadFile'
-                    [disabled]='loadingUploadFile'>
+            <button mat-mini-fab (click)='deleteFile(i)' color='warn' class='ms-4' [disabled]='showUploader'>
               <mat-icon>delete_forever</mat-icon>
             </button>
 
-            <button mat-mini-fab (click)='addFile()' class='ms-2' type='button' [class.spinner]='loadingUploadFile'
-                    [disabled]='loadingUploadFile'>
+            <button mat-mini-fab (click)='addFile()' class='ms-2' type='button' [disabled]='showUploader'>
               <mat-icon>add</mat-icon>
             </button>
 
@@ -95,6 +97,17 @@
       </div>
 
     </ng-container>
+
+    <div class="row" *ngIf="showUploader">
+
+      <div class="col-md-12">
+        <div class="overflow-hidden">
+          <p class="float-start">{{fileUploaded || 0}} %</p>
+        </div>
+        <mat-progress-bar mode="determinate" dir="rtl" [value]="fileUploaded || 0"></mat-progress-bar>
+      </div>
+
+    </div>
 
 
     <div class='row'>

@@ -14,6 +14,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 
 
 @NgModule({
@@ -34,7 +35,8 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     MatCardModule,
     MatExpansionModule,
     MatChipsModule,
-    MatTooltipModule
+    MatTooltipModule,
+    MatProgressBarModule
   ]
 })
 export class SubTaskModule {

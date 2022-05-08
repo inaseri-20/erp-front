@@ -36,4 +36,8 @@ export class TaskService {
   getStatues(): Observable<any> {
     return this.apiService.get(`${this.taskBaseApi}status/`);
   }
+
+  getFileSize(data: any): Observable<any> {
+    return this.apiService.post(`${environment.apiUrl}file/chunk/`, null, null, data);
+  }
 }
