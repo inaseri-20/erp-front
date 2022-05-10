@@ -62,4 +62,8 @@ export class DashboardService {
   deleteDepartmentUser(filters: any): Observable<any> {
     return this.apiService.delete(`${this.departmentBaseApi}assign/user/`, null, filters);
   }
+
+  getProjectTaskStatuses(projectId: any): Observable<any> {
+    return this.apiService.get(`${environment.apiUrl}task/project/task/status/${projectId}`);
+  }
 }

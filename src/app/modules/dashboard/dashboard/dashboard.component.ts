@@ -34,7 +34,15 @@ export class DashboardComponent implements OnInit {
   getProjects(): void {
     this.dashboardService.getProjects().subscribe(
       response => {
+        response.forEach((el: any) => {
+          this.dashboardService.getProjectTaskStatuses(el.id).subscribe(
+            response => {
+              el.tasksStatuses = response;
+            }
+          );
+        })
         this.projects = response;
+        console.log(this.projects);
       }
     );
   }
@@ -51,5 +59,4 @@ export class DashboardComponent implements OnInit {
     event.preventDefault();
     this.router.navigate(['/task'], { queryParams: { projectId: data } });
   }
-
 }

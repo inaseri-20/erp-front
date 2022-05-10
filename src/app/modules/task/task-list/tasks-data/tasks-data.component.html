@@ -49,19 +49,25 @@
             </div>
           </div>
 
-          <div class='d-flex mt-2'>
+          <div class='d-flex mt-2 mb-3'>
 
 
-            <span class='text-muted float-end ms-3' style='font-size: 10px;' [matTooltip]="task.ownerTooltip">({{task.owner_full_name}})</span>
+            <span class='text-muted float-end ms-3' style='font-size: 10px;'
+                  [matTooltip]='task.ownerTooltip'>({{task.owner_full_name}})</span>
 
             <mat-icon class=''>arrow_left</mat-icon>
 
-            <span class='text-muted float-start' style='font-size: 10px;' [matTooltip]="task.assigneeTooltip">({{task.assignee_full_name}})</span>
+            <span class='text-muted float-start' style='font-size: 10px;'
+                  [matTooltip]='task.assigneeTooltip'>({{task.assignee_full_name}})</span>
 
           </div>
 
+          <div [ngStyle]="{'color': task?.alert?.deadLineLimitColor}">تعداد روز باقی
+            مانده: {{task?.alert?.deadLineLimitValue}}%</div>
+          <mat-progress-bar mode='determinate' class='mt-2' [value]='task?.alert?.deadLineLimitValue'></mat-progress-bar>
 
         </mat-card-content>
+
 
       </mat-card>
       <mat-menu #menu='matMenu'>

@@ -69,6 +69,31 @@
                 </div>
               </div>
 
+              <hr class='w-100 bg-dark'>
+              <div class='d-flex'>
+                <div class='d-block'>
+                  <p>تسک ها</p>
+                  <ul>
+                    <li *ngFor='let taskStatus of project?.tasksStatuses?.task'
+                        class='mt-2' [ngStyle]="{'color': taskStatus?.color}"
+                        style='font-size: 12px'>
+                      {{taskStatus?.status}} ({{taskStatus?.count}})
+                    </li>
+                  </ul>
+                </div>
+
+                <div class='d-block ms-auto'>
+                  <p>ساب تسک ها</p>
+                  <ul>
+                    <li *ngFor='let taskStatus of project?.tasksStatuses?.task_data'
+                        class='mt-2' style='font-size: 12px'
+                        [ngStyle]="{'color': taskStatus?.color}">
+                      {{taskStatus?.status}} ({{taskStatus?.count}})
+                    </li>
+                  </ul>
+                </div>
+              </div>
+
 
             </mat-card-content>
 
