@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { AlertService } from '../../../core/services/alert/alert.service';
 import { TaskService } from '../task.service';
 import { DashboardService } from '../../dashboard/dashboard.service';
@@ -35,6 +35,7 @@ export class CreateTaskComponent implements OnInit {
     this.getUsers();
     if (this.activatedRoute.snapshot.queryParams['taskId']) {
       this.getTaskDetail();
+      this.taskForm.addControl('done', new FormControl())
     }
   }
 

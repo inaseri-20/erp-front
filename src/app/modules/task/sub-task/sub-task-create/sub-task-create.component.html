@@ -68,16 +68,13 @@
 
         <div class='col-12'>
 
-
-<!--          <input name='uploadedFile' class='d-none' type='file' [id]='i'-->
-<!--                 (change)="addFileObject($event, 'file', i)" />-->
           <mat-form-field appearance='standard' class='w-75'>
             <input matInput formControlName='fileName' [required]='false' (click)='triggerFileSelect(i)'
                    [placeholder]="file.get('fileName')?.value" [readonly]='loadingUploadFile'>
             <mat-icon matPrefix color='primary'>attach_file</mat-icon>
           </mat-form-field>
 
-          <input name="uploadedFile" class="d-none" type="file" [id]="i" (change)="addFileObject($event, 'file', i)"/>
+          <input name='uploadedFile' class='d-none' type='file' [id]='i' (change)="addFileObject($event, 'file', i)" />
 
 
           <div class='float-end mt-3'>
@@ -98,13 +95,13 @@
 
     </ng-container>
 
-    <div class="row" *ngIf="showUploader">
+    <div class='row' *ngIf='showUploader'>
 
-      <div class="col-md-12">
-        <div class="overflow-hidden">
-          <p class="float-start">{{fileUploaded || 0}} %</p>
+      <div class='col-md-12'>
+        <div class='overflow-hidden'>
+          <p class='float-start'>{{fileUploaded || 0}} %</p>
         </div>
-        <mat-progress-bar mode="determinate" dir="rtl" [value]="fileUploaded || 0"></mat-progress-bar>
+        <mat-progress-bar mode='determinate' dir='rtl' [value]='fileUploaded || 0'></mat-progress-bar>
       </div>
 
     </div>
@@ -117,6 +114,62 @@
         </button>
       </div>
     </div>
+
+  </ng-container>
+
+</form>
+
+
+<form [formGroup]='subTaskLogsForm' class='mt-3' *ngIf='this.data?.data?.id'>
+
+  <div class='row'>
+    <hr class='w-100 text-black'>
+    <div class='overflow-hidden'>
+      <h3 class='float-start'>ساعت ها</h3>
+      <button mat-mini-fab (click)='addLog()' class='float-end' type='button' [class.spinner]='loadingUploadFile'
+              [disabled]='loadingUploadFile'>
+        <mat-icon>add</mat-icon>
+      </button>
+    </div>
+  </div>
+
+  <ng-container formArrayName='logs'>
+
+    <ng-container *ngFor='let log of logs.controls; let i = index'>
+
+      <div class='row' [formGroupName]='i'>
+
+        <input type='hidden' formControlName='task_data' [value]='this.data.data.id'>
+
+        <div class='col'>
+          <mat-form-field appearance='standard' class='w-100'>
+            <mat-label>ساعت شروع</mat-label>
+            <input type='datetime-local' matInput formControlName='start_time'>
+          </mat-form-field>
+        </div>
+
+        <div class='col'>
+          <mat-form-field appearance='standard' class='w-100'>
+            <mat-label>ساعت پایان</mat-label>
+            <input type='datetime-local' matInput formControlName='end_time'>
+          </mat-form-field>
+        </div>
+
+        <div class='col mt-3'>
+
+          <button mat-mini-fab (click)='deleteLog(i)' color='warn' class='ms-4' [disabled]='showUploader'>
+            <mat-icon>delete_forever</mat-icon>
+          </button>
+
+          <button mat-mini-fab (click)='addLog()' class='ms-2' type='button' [disabled]='showUploader'>
+            <mat-icon>check</mat-icon>
+          </button>
+
+        </div>
+
+      </div>
+
+    </ng-container>
 
   </ng-container>
 

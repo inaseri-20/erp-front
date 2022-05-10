@@ -19,6 +19,7 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { TasksDataComponent } from './task-list/tasks-data/tasks-data.component';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 
 
 @NgModule({
@@ -44,7 +45,8 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
     MatMenuModule,
     MatExpansionModule,
     MatTabsModule,
-    MatProgressBarModule
+    MatProgressBarModule,
+    MatSlideToggleModule
   ]
 })
 export class TaskModule {

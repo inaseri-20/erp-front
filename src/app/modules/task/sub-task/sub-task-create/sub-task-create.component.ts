@@ -28,6 +28,8 @@ export class SubTaskCreateComponent implements OnInit {
   fileUploaded = 0;
   showUploader = false;
 
+  subTaskLogsForm!: FormGroup;
+
   constructor(public router: Router,
               public activatedRoute: ActivatedRoute,
               private formBuilder: FormBuilder,
@@ -70,6 +72,9 @@ export class SubTaskCreateComponent implements OnInit {
       status: ['', [Validators.required]],
       fileList: this.formBuilder.array([])
     });
+    this.subTaskLogsForm = this.formBuilder.group({
+      logs: this.formBuilder.array([])
+    });
   }
 
   get files(): FormArray {
@@ -82,6 +87,23 @@ export class SubTaskCreateComponent implements OnInit {
       fileName: ['']
     });
     this.files.push(fileForm);
+  }
+
+  get logs(): FormArray {
+    return this.subTaskLogsForm.controls['logs'] as FormArray;
+  }
+
+  addLog() {
+    const logFrom = this.formBuilder.group({
+      task_data: ['', [Validators.required]],
+      start_time: ['', [Validators.required]],
+      end_time: ['', [Validators.required]]
+    })
+    this.logs.push(logFrom);
+  }
+
+  deleteLog(fileIndex: number) {
+    this.logs.removeAt(fileIndex);
   }
 
   deleteFile(fileIndex: number) {
@@ -133,6 +155,10 @@ export class SubTaskCreateComponent implements OnInit {
         this.statuses = response;
       }
     );
+  }
+
+  createSubTaskLog(): void {
+
   }
 
   async addFileObject(files: any, formControlName: string, index: number): Promise<any> {
