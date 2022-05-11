@@ -34,6 +34,10 @@ export class SubTaskService {
   }
 
   getDownloadLink(fileName: string): Observable<any> {
-    return this.apiService.get(`${environment.apiUrl}file/?file_name=${fileName}`)
+    return this.apiService.get(`${environment.apiUrl}file/?file_name=${fileName}`);
+  }
+
+  addSubTaskLog(data: any): Observable<any> {
+    return this.apiService.post(`${this.subTaskBaseApi}logs/`, null, null, data);
   }
 }

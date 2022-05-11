@@ -139,29 +139,45 @@
 
       <div class='row' [formGroupName]='i'>
 
-        <input type='hidden' formControlName='task_data' [value]='this.data.data.id'>
+        <input type='hidden' formControlName='task_data' [value]='this.data.taskId'>
 
-        <div class='col'>
-          <mat-form-field appearance='standard' class='w-100'>
+        <div class='wrapper-logs'>
+
+          <mat-form-field appearance='standard'>
             <mat-label>ساعت شروع</mat-label>
-            <input type='datetime-local' matInput formControlName='start_time'>
+            <input matInput formControlName='start_time_jalali' [readonly]='true'>
+            <button mat-icon-button
+                    [disabled]='log.disabled'
+                    matSuffix
+                    (click)="openDateTime('start_time', i, 'start_time_jalali')">
+              <mat-icon>date_range</mat-icon>
+            </button>
           </mat-form-field>
-        </div>
 
-        <div class='col'>
-          <mat-form-field appearance='standard' class='w-100'>
+          <mat-form-field appearance='standard'>
             <mat-label>ساعت پایان</mat-label>
-            <input type='datetime-local' matInput formControlName='end_time'>
+            <input matInput formControlName='end_time_jalali' [readonly]='true'>
+            <button mat-icon-button
+                    [disabled]='log.disabled'
+                    matSuffix
+                    (click)="openDateTime('end_time', i, 'end_time_jalali')">
+              <mat-icon>date_range</mat-icon>
+            </button>
           </mat-form-field>
-        </div>
 
-        <div class='col mt-3'>
-
-          <button mat-mini-fab (click)='deleteLog(i)' color='warn' class='ms-4' [disabled]='showUploader'>
+          <button mat-mini-fab
+                  (click)='deleteLog(i)'
+                  color='warn'
+                  class='my-auto'
+                  [disabled]='log.disabled'>
             <mat-icon>delete_forever</mat-icon>
           </button>
 
-          <button mat-mini-fab (click)='addLog()' class='ms-2' type='button' [disabled]='showUploader'>
+          <button mat-mini-fab
+                  (click)='submitLog(i)'
+                  type='submit'
+                  class='my-auto'
+                  [disabled]='log.disabled'>
             <mat-icon>check</mat-icon>
           </button>
 

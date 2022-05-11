@@ -25,6 +25,15 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatSelectModule } from '@angular/material/select';
 import { MatTableModule } from '@angular/material/table';
 import { MatSortModule } from '@angular/material/sort';
+import { ConvertDatePipe } from './components/persian-date-picker/convert-date.pipe';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { ApiInterceptor } from '../core/interceptor/api.interceptor';
+import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
+import {
+  MaterialPersianDateAdapter,
+  PERSIAN_DATE_FORMATS
+} from './components/persian-date-picker/persian-date-picker.adapter';
+import { DateTimePickerComponent } from './components/date-time-picker/date-time-picker.component';
 
 
 @NgModule({
@@ -37,6 +46,7 @@ import { MatSortModule } from '@angular/material/sort';
     TableSaveCSVComponent,
     TableComponent,
     TableSaveXLSComponent,
+    DateTimePickerComponent
   ],
   imports: [
     NgxEchartsModule.forRoot({
@@ -71,6 +81,10 @@ import { MatSortModule } from '@angular/material/sort';
     TableSaveXLSComponent,
   ],
   providers: [
+    { provide: MatPaginatorIntl, useClass: CustomMatPaginatorIntlService },
+    ConvertDatePipe,
+    { provide: DateAdapter, useClass: MaterialPersianDateAdapter, deps: [MAT_DATE_LOCALE] },
+    { provide: MAT_DATE_FORMATS, useValue: PERSIAN_DATE_FORMATS },
     { provide: MatPaginatorIntl, useClass: CustomMatPaginatorIntlService }
   ]
 })

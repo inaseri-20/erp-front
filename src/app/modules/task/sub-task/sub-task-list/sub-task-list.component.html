@@ -2,49 +2,57 @@
                  [secondButtonIcon]="'loupe'"
                  [secondButtonTooltip]="'افزدن ساب تسک'"
                  (secondButtonAction)='openCreateSubTask()'
-                 [firstButtonIcon]="'cancel'"
-                 (firstButtonAction)='this.dialogRef.close(false)'>
+                 [firstButtonIcon]="'arrow_back'"
+                 (firstButtonAction)="router.navigate(['/task'])">
 </app-page-header>
 
 
-<mat-accordion>
+<div class='row'>
 
-  <mat-expansion-panel class='my-2' *ngFor='let subTask of subTasks'>
+  <div class='col-md-10 col-12 mx-auto'>
 
-    <mat-expansion-panel-header>
-      <mat-panel-title>
+    <mat-accordion>
 
-        <div class='status-avatar me-2'
-             [matTooltip]='subTask.status_name'
-             [ngStyle]="{'background': subTask.status_color}">
+      <mat-expansion-panel class='my-2' *ngFor='let subTask of subTasks'>
+
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+
+            <div class='status-avatar me-2'
+                 [matTooltip]='subTask.status_name'
+                 [ngStyle]="{'background': subTask.status_color}">
+            </div>
+
+            {{subTask?.message}}
+
+          </mat-panel-title>
+          <mat-panel-description class='d-flex'>
+            <div style='font-size: 10px' >{{subTask?.owner}}</div>
+            <mat-icon>arrow_left</mat-icon>
+            <div style='font-size: 10px'>{{subTask?.assignee}}</div>
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+
+        <hr class='w-100 text-black'>
+
+        <div class='overflow-hidden'>
+          <h3 class='float-start'>فایل</h3>
+          <button mat-icon-button color='accent' (click)='openCreateSubTask(subTask)' class='float-end'>
+            <mat-icon>edit</mat-icon>
+          </button>
         </div>
 
-        {{subTask?.message}}
+        <div *ngIf='subTask?.files.length > 0'>
 
-      </mat-panel-title>
-      <mat-panel-description class='d-flex'>
-        <div style='font-size: 10px' >{{subTask?.owner}}</div>
-        <mat-icon>arrow_left</mat-icon>
-        <div style='font-size: 10px'>{{subTask?.assignee}}</div>
-      </mat-panel-description>
-    </mat-expansion-panel-header>
+          <mat-chip-list *ngFor='let file of subTask?.files'>
+            <mat-chip color='primary' selected (click)='download(file)'>{{file}}</mat-chip>
+          </mat-chip-list>
+        </div>
 
-    <hr class='w-100 text-black'>
+      </mat-expansion-panel>
 
-    <div class='overflow-hidden'>
-      <h3 class='float-start'>فایل</h3>
-      <button mat-icon-button color='accent' (click)='openCreateSubTask(subTask)' class='float-end'>
-        <mat-icon>edit</mat-icon>
-      </button>
-    </div>
+    </mat-accordion>
 
-    <div *ngIf='subTask?.files.length > 0'>
+  </div>
 
-      <mat-chip-list *ngFor='let file of subTask?.files'>
-        <mat-chip color='primary' selected (click)='download(file)'>{{file}}</mat-chip>
-      </mat-chip-list>
-    </div>
-
-  </mat-expansion-panel>
-
-</mat-accordion>
+</div>

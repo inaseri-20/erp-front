@@ -71,6 +71,7 @@
 
               <hr class='w-100 bg-dark'>
               <div class='d-flex'>
+
                 <div class='d-block'>
                   <p>تسک ها</p>
                   <ul>
@@ -91,6 +92,17 @@
                       {{taskStatus?.status}} ({{taskStatus?.count}})
                     </li>
                   </ul>
+                </div>
+
+              </div>
+
+              <div class='d-flex'>
+                <div class='d-block'>
+                  <p>مجموع زمان های این پروژه</p>
+                    <span class='text-muted' style='font-size: 12px;'
+                          [matTooltip]="'مجموع ساعات تا این لحظه'">({{project.spent_hours?.hour}}
+                      : {{project.spent_hours?.minute}}
+                      )</span>
                 </div>
               </div>
 

@@ -10,14 +10,10 @@ import { catchError, finalize } from 'rxjs/operators';
 @Injectable()
 export class ApiInterceptor implements HttpInterceptor {
 
-  private totalRequests = 0;
-  private hasError = false;
-
   constructor() {
   }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<any> {
-    this.totalRequests++;
 
     if (localStorage.getItem('erpAccessToken')) {
       const token = localStorage.getItem('erpAccessToken');
@@ -31,20 +27,19 @@ export class ApiInterceptor implements HttpInterceptor {
 
     return next.handle(req).pipe(
       finalize(() => {
-        this.totalRequests--;
-        if (this.totalRequests === 0) {
-        }
-      }), catchError(err1 => this.handleError(err1))
+      }), catchError(err => this.handleError(err))
     );
   }
 
   handleError(error: any): any {
-    let errorMessage = '';
+    let errorMessage;
     if (error.error instanceof ErrorEvent) {
-      errorMessage = `${error?.error?.msg}`;
+      errorMessage = error?.error;
     } else {
-      errorMessage = ` ${error?.error?.msg}`;
+      console.log(error.error.msg);
+      errorMessage = error.error.msg;
     }
+
     return throwError(errorMessage);
   }
 

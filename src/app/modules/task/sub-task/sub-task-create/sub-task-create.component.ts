@@ -4,12 +4,14 @@ import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@ang
 import { DashboardService } from '../../../dashboard/dashboard.service';
 import { SubTaskService } from '../sub-task.service';
 import { AlertService } from '../../../../core/services/alert/alert.service';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { CleanObjectService } from '../../../../core/services/api/clean-object.service';
 import { TaskService } from '../../task.service';
 import { environment } from '../../../../../environments/environment';
 import { ApiService } from '../../../../core/services/api/api.service';
 import { BigUploaderService } from '../../../../core/pipes/big-uploader.service';
+import { DateTimePickerComponent } from '../../../../share/components/date-time-picker/date-time-picker.component';
+import * as moment from 'jalali-moment';
 
 @Component({
   selector: 'app-sub-task-create',
@@ -39,6 +41,7 @@ export class SubTaskCreateComponent implements OnInit {
               private taskService: TaskService,
               private bigUploaderService: BigUploaderService,
               public dialogRef: MatDialogRef<SubTaskCreateComponent>,
+              private matDialog: MatDialog,
               private apiService: ApiService,
               @Inject(MAT_DIALOG_DATA) public data: any,
               private dashboardService: DashboardService) {
@@ -57,6 +60,15 @@ export class SubTaskCreateComponent implements OnInit {
           fileName: el
         });
         this.addFile();
+      });
+      this.data.data.logs.forEach((el: any, index: number) => {
+        this.addLog();
+        el.task_data = this.data.taskId;
+        moment.locale('fa', { useGregorianParser: true });
+        el.start_time_jalali = moment(new Date(el.start_time).toISOString()).format('HH:MM YYYY/MM/DD');
+        el.end_time_jalali = moment(new Date(el.end_time).toISOString()).format('HH:MM YYYY/MM/DD');
+        this.logs.at(index).patchValue(el);
+        this.logs.at(index).disable()
       });
       this.subTaskForm.get('fileList')?.setValue(files);
     } else {
@@ -97,8 +109,10 @@ export class SubTaskCreateComponent implements OnInit {
     const logFrom = this.formBuilder.group({
       task_data: ['', [Validators.required]],
       start_time: ['', [Validators.required]],
-      end_time: ['', [Validators.required]]
-    })
+      end_time: ['', [Validators.required]],
+      start_time_jalali: ['', [Validators.required]],
+      end_time_jalali: ['', [Validators.required]]
+    });
     this.logs.push(logFrom);
   }
 
@@ -157,10 +171,6 @@ export class SubTaskCreateComponent implements OnInit {
     );
   }
 
-  createSubTaskLog(): void {
-
-  }
-
   async addFileObject(files: any, formControlName: string, index: number): Promise<any> {
     files = files?.target?.files;
     this.bigUploaderService.uploaded$.subscribe((results: any) => {
@@ -197,5 +207,25 @@ export class SubTaskCreateComponent implements OnInit {
     return { key: key.key };
   }
 
+  submitLog(index: number) {
+    this.logs.at(index).get('task_data')?.setValue(this.data.taskId);
+    const submitData = {
+      task_data: this.logs.at(index).get('task_data')?.value,
+      start_time: this.logs.at(index).get('start_time')?.value,
+      end_time: this.logs.at(index).get('end_time')?.value
+    };
+    this.subTaskService.addSubTaskLog(submitData).subscribe(
+      response => {
+        this.alertService.messageSuccess('ساعت شما ثبت شد');
+        this.logs.at(index).disable();
+      }, error => this.alertService.messageError(error)
+    );
+  }
 
+  openDateTime(formControlName: string, index: number, viewFormControlName: string): void {
+    this.matDialog.open(DateTimePickerComponent).afterClosed().subscribe(result => {
+      this.logs.at(index).get(viewFormControlName)?.setValue(result?.jalaliDate);
+      this.logs.at(index).get(formControlName)?.setValue(result?.gregorianDate);
+    });
+  }
 }
