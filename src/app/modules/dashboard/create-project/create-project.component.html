@@ -47,7 +47,7 @@
             <div class='col'>
               <mat-form-field appearance='outline' class='w-100'>
                 <mat-label>مدیر پروژه</mat-label>
-                <mat-select formControlName='owner' [required]='true'>
+                <mat-select formControlName='assignee' [required]='true'>
                   <mat-option *ngFor='let client of clients' [value]='client.id'>
                     {{client.first_name}} {{client.last_name}}
                   </mat-option>
@@ -69,17 +69,17 @@
 
             <div class='col'>
               <app-persian-date-picker
-                [dateControl]="projectForm.get('dead_line')"
-                datePickerLabel='محدودیت زمانی'
-                (selectedDate)="setDate($event, 'dead_line')"
+                [dateControl]="projectForm.get('start_date')"
+                datePickerLabel='تاریخ شروع'
+                (selectedDate)="setDate($event, 'start_date')"
               ></app-persian-date-picker>
             </div>
 
             <div class='col'>
               <app-persian-date-picker
-                [dateControl]="projectForm.get('start_date')"
-                datePickerLabel='تاریخ شروع'
-                (selectedDate)="setDate($event, 'start_date')"
+                [dateControl]="projectForm.get('dead_line')"
+                datePickerLabel='محدودیت زمانی'
+                (selectedDate)="setDate($event, 'dead_line')"
               ></app-persian-date-picker>
             </div>
 
@@ -91,6 +91,10 @@
 
               <button mat-raised-button type='button' color='warn' class='ms-3' (click)='deleteProject()'
                       *ngIf="activatedRoute.snapshot.queryParams['projectId']">حذف پروژه
+              </button>
+
+              <button mat-raised-button type='button' color='accent' class='ms-3' (click)='updateProjectStatus()'
+                      *ngIf="activatedRoute.snapshot.queryParams['projectId']">به روز رسانی وضعیت پروژه
               </button>
             </div>
           </div>

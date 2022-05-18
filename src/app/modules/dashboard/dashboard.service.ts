@@ -35,6 +35,11 @@ export class DashboardService {
     return this.apiService.put(`${this.projectBaseApi}project/${projectId}/`, null, null, data);
   }
 
+  updateProjectStatus(data: any, projectId: any): Observable<any> {
+    return this.apiService.put(`${this.projectBaseApi}project/status/${projectId}/`, null, null, data);
+  }
+
+
   getStatues(): Observable<any> {
     return this.apiService.get(`${this.projectBaseApi}status`);
   }

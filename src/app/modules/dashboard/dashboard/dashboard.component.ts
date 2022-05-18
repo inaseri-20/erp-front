@@ -42,7 +42,6 @@ export class DashboardComponent implements OnInit {
           );
         })
         this.projects = response;
-        console.log(this.projects);
       }
     );
   }

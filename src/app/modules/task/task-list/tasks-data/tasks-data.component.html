@@ -12,7 +12,10 @@
           <div class='d-flex align-items-center'>
 
             <div class='d-block ms-2'>
-              <h2 class='m-0'>{{task.title}}</h2>
+              <h2 class='m-0'>
+                {{task.title}}
+                <span style='font-size: 10px;'>({{task?.task_data.length}} فعالیت های اجرایی)</span>
+              </h2>
               <div class='d-flex'>
                 <span class=' text-muted'>{{task.description || 'توضیحاتی ثبت نشده است'}}</span>
               </div>
@@ -27,7 +30,7 @@
 
           <div class='d-flex align-items-center my-3 text-success' style='font-size: 12px' *ngIf='task?.done'>
             <div class='ms-2'>وضعیت</div>
-            <div class='ms-auto'>اتمام تسک ({{task?.done_time | persianDate}})</div>
+            <div class='ms-auto'>اتمام فعالیت ({{task?.done_time | persianDate}})</div>
           </div>
 
           <div class='d-flex align-items-center my-3' style='font-size: 12px' *ngIf='!task?.done'>
@@ -45,19 +48,21 @@
           </div>
 
           <div class='d-flex align-items-center mt-2'>
+
             <div class='d-flex align-items-center'>
+              <button mat-icon-button matTooltip='تاریخ شروع'>
+                <mat-icon class='text-success'>not_started</mat-icon>
+              </button>
+              <span class='text-success'>{{task.start_date | persianDate}}</span>
+            </div>
+
+            <div class='d-flex align-items-center mx-auto'>
               <button mat-icon-button matTooltip='محدودیت زمانی'>
                 <mat-icon class='text-danger'>notifications_active</mat-icon>
               </button>
               <span class='text-danger'>{{task.dead_line | persianDate}}</span>
             </div>
 
-            <div class='d-flex align-items-center mx-auto'>
-              <button mat-icon-button matTooltip='تاریخ شروع'>
-                <mat-icon class='text-success'>not_started</mat-icon>
-              </button>
-              <span class='text-success'>{{task.start_date | persianDate}}</span>
-            </div>
           </div>
 
           <div class='d-flex mt-2 mb-3'>
@@ -77,8 +82,14 @@
 
           </div>
 
-          <div [ngStyle]="{'color': task?.alert?.deadLineLimitColor}">تعداد روز باقی
+          <div [ngStyle]="{'color': task?.alert?.deadLineLimitColor}" *ngIf='task?.alert?.deadLineLimitValue > 0'>تعداد
+            روز باقی
             مانده: {{task?.alert?.deadLineLimitValue}}%
+          </div>
+
+          <div [ngStyle]="{'color': task?.alert?.deadLineLimitColor}" *ngIf='task?.alert?.deadLineLimitValue < 0'>تعداد
+            روز باقی
+            مانده: 0%
           </div>
           <mat-progress-bar mode='determinate' class='mt-2'
                             [value]='task?.alert?.deadLineLimitValue'></mat-progress-bar>
@@ -90,7 +101,7 @@
       <mat-menu #menu='matMenu'>
         <button mat-menu-item [routerLink]="['/task/create']" [queryParams]='{taskId: task.id, projectId}'>ویرایش
         </button>
-        <button mat-menu-item [routerLink]="['/task/sub-task/' + task.id]">مشاهده ساب تسک ها</button>
+        <button mat-menu-item [routerLink]="['/task/sub-task/' + task.id]">مشاهده ساب فعالیت های لازم</button>
       </mat-menu>
 
     </a>

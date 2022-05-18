@@ -74,7 +74,7 @@ export class CreateProjectComponent implements OnInit {
       title: ['', [Validators.required]],
       description: [''],
       status: [],
-      owner: ['', [Validators.required]],
+      assignee: ['', [Validators.required]],
       department: ['', [Validators.required]],
       dead_line: [''],
       start_date: ['']
@@ -82,8 +82,13 @@ export class CreateProjectComponent implements OnInit {
 
     if (JSON.stringify(localStorage.getItem('group')).includes('middle')) {
       const userId: any = jwt_decode(JSON.stringify(localStorage.getItem('erpAccessToken')));
-      this.projectForm.get('owner')?.setValue(userId.user_id);
-      this.projectForm.get('owner')?.disable();
+      this.projectForm.get('assignee')?.setValue(userId.user_id);
+      this.projectForm.get('assignee')?.disable();
+      this.projectForm.get('start_date')?.disable();
+      this.projectForm.get('description')?.disable();
+      this.projectForm.get('dead_line')?.disable();
+      this.projectForm.get('title')?.disable();
+      this.projectForm.get('department')?.disable();
     }
   }
 
@@ -93,7 +98,7 @@ export class CreateProjectComponent implements OnInit {
   }
 
   submitProject(): void {
-    const submitData = this.cleanObjectService.clean(this.projectForm.getRawValue());
+    let submitData = this.cleanObjectService.clean(this.projectForm.getRawValue());
     if (this.activatedRoute.snapshot.queryParams['projectId']) {
       this.dashboardService.updateProject(submitData, this.activatedRoute.snapshot.queryParams['projectId']).subscribe(
         response => {
@@ -111,6 +116,15 @@ export class CreateProjectComponent implements OnInit {
 
   deleteProject(): void {
     this.dashboardService.deleteProject(this.activatedRoute.snapshot.queryParams['projectId']).subscribe(
+      response => {
+        this.router.navigate(['/admin/dashboard']);
+      }, error => this.alertService.messageError(error)
+    );
+  }
+
+  updateProjectStatus(): void {
+    const data = { status: this.projectForm.get('status')?.value };
+    this.dashboardService.updateProjectStatus(data, this.activatedRoute.snapshot.queryParams['projectId']).subscribe(
       response => {
         this.router.navigate(['/admin/dashboard']);
       }, error => this.alertService.messageError(error)

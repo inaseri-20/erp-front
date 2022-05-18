@@ -1,6 +1,6 @@
-<app-page-header [pageTitle]="'ساب تسک ها'"
+<app-page-header [pageTitle]="'لیست فعالیت های لازم'"
                  [secondButtonIcon]="'loupe'"
-                 [secondButtonTooltip]="'افزدن ساب تسک'"
+                 [secondButtonTooltip]="'افزدن فعالیت های اجرایی'"
                  (secondButtonAction)='openCreateSubTask()'
                  [firstButtonIcon]="'arrow_back'"
                  (firstButtonAction)="router.navigate(['/task'])">
@@ -30,6 +30,8 @@
             <div style='font-size: 10px' >{{subTask?.owner}}</div>
             <mat-icon>arrow_left</mat-icon>
             <div style='font-size: 10px'>{{subTask?.assignee}}</div>
+
+            <div style='font-size: 10px' class='ms-auto me-2'>{{subTask?.spent_hours?.hour}} : {{subTask?.spent_hours?.minute}}</div>
           </mat-panel-description>
         </mat-expansion-panel-header>
 
