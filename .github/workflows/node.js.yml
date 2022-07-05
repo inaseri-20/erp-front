@@ -28,10 +28,3 @@ jobs:
         cache: 'npm'
     - run: npm install --force
     - run: npm run build
-    
-    - name: Secret
-      env:
-        SECRET_API_KEY: ${{ secrets.API_KEY}}
-    
-    - name: Deploy
-    - uses: crazy-max/ghaction-github-pages@v3
